@@ -1,0 +1,30 @@
+= Zish
+
+A data serialization format.
+
+```
+// Curly brackets delimit a map
+{
+  "title": "A Hero of Our Time",  // A key / value pair of strings
+  "description": null,
+  "key": 'a3NoaGdybA==',  // Single quotes delimit base64 encoded binary
+  "number_of_novellas": 5,
+  "price": 7.99,
+  "read_date": 2017-07-16T14:05:00Z,
+  "tags": [  // Square brackets delimit a list
+    "russian",
+    "novel",
+    "19th century"],
+  "weight": 6.88,
+  "would_recommend": true}
+```
+
+integer::
+  
+list::
+  [
+
+
+== Motivation
+
+
