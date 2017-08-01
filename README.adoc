@@ -1,33 +1,79 @@
 = Zish
 
-A data serialization format.
+A data serialization format, designed to be an improvement on JSON. It adds
+timestamp, decimal and binary types, as well as multi-line strings.
+
+
+== Zish Format
+
+ Here's an example:
 
 ```
+// This is a comment
+
 // Curly brackets delimit a map
 {
   "title": "A Hero of Our Time",  // A key / value pair of strings
   "description": null,
   "key": 'a3NoaGdybA==',  // Single quotes delimit base64 encoded binary
   "number_of_novellas": 5,
-  "price": 7.99,
+  "price": 7.99,  // A decimal (lossless) number
   "read_date": 2017-07-16T14:05:00Z,
   "tags": [  // Square brackets delimit a list
     "russian",
     "novel",
     "19th century"],
-  "weight": 6.88,
+  "weight": 6.88e0,  // A float (lossy) number
   "would_recommend": true}
 ```
 
-integer::
-  
-list::
-  [
+The https://github.com/tlocke/zish/blob/master/zish/antlr/Zish.g4[formal
+specification] of Zish is an http://www.antlr.org/[ANTLR] grammar.
 
 
 == Motivation
 
-== Python
+https://en.wikipedia.org/wiki/JSON[JSON] is wildly popular, but it lacks some
+primitive data types:
+
+* Timestamp
+* Decimal (exact https://en.wikipedia.org/wiki/Decimal_data_type[decimal]
+  number)
+* Binary (a string of bytes) 
+
+Zish has these types, in addition to the JSON types.
+
+=== Why not just use Amazon Ion?
+
+Zish is heavily influenced by https://amzn.github.io/ion-docs/index.html[Amazon
+Ion], but Ion has the following shortcomings as a replacement for JSON:
+
+* Ion doesn't have a map type, instead it has a struct type which allows
+  duplicate keys.
+* Ion has data types such as '`symbol`', s-expressions, and '`keyword`' which
+  aren't commonly needed.
+* There are three text types in Ion, which may be confusing.
+* There are two binary data types.
+
+That's not to say isn't an excellent format, this is just evaluating it as an
+improvement on JSON.
+
+
+=== Why not just use the edn format?
+
+Like Amazon Ion, https://github.com/edn-format/edn[edn] has more features than
+is necessary for an improved JSON. In particular:
+
+* It's extensible, ie. it has a mechanism for user defined types.
+* Edn has types such as '`character`', '`symbol`', '`vector`' which may not be
+  needed.
+* The timestamp type isn't a first-class type, it's added in as an extension.
+
+Again, this isn't to be derogatory about edn, it's just evaluating it as a
+replacement to JSON.
+
+
+== Python Implementation
 
 A Python 3 library for the Zish format, released under the
 https://github.com/tlocke/zish/blob/master/LICENSE[MIT Licence].
@@ -95,6 +141,14 @@ Zish string to a Python object use `zish.loads`. Eg.
 A Hero of Our Time
 
 ....
+
+
+== Release Notes
+
+
+=== Version 0.0.0 (2017-08-01)
+
+* First public release. Passes all the tests.
 
 
 == Contributing
