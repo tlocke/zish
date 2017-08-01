@@ -27,4 +27,103 @@ list::
 
 == Motivation
 
+== Python
 
+A Python 3 library for the Zish format, released under the
+https://github.com/tlocke/zish/blob/master/LICENSE[MIT Licence].
+
+image:https://travis-ci.org/tlocke/zish.svg?branch=master["Build Status",
+link="https://travis-ci.org/tlocke/zish"]
+
+
+== Installation
+
+It's a good idea to set up a virtualenv:
+
+ virtualenv venv
+ source venv/bin/activate
+
+then install Zish with pip:
+
+ pip install zish
+
+
+== Quickstart
+
+To go from a Python object to an Zish string use `zish.dumps`. To go from an
+Zish string to a Python object use `zish.loads`. Eg.
+
+....
+>>> from zish import loads, dumps
+>>> from datetime import datetime, timezone
+>>> from decimal import Decimal
+>>>
+>>> # Take a Python object
+>>> book = {
+...     'title': 'A Hero of Our Time',
+...     'read_date': datetime(2017, 7, 16, 14, 5, tzinfo=timezone.utc),
+...     'would_recommend': True,
+...     'description': None,
+...     'number_of_novellas': 5,
+...     'price': Decimal('7.99'),
+...     'weight': 6.88,
+...     'key': bytearray(b'kshhgrl'),
+...     'tags': ['russian', 'novel', '19th century']}
+>>>
+>>> # Output it as an Zish string
+>>> zish_str = dumps(book)
+>>> print(zish_str)
+{
+  "description": null,
+  "key": 'a3NoaGdybA==',
+  "number_of_novellas": 5,
+  "price": 7.99,
+  "read_date": 2017-07-16T14:05:00Z,
+  "tags": [
+    "russian",
+    "novel",
+    "19th century"],
+  "title": "A Hero of Our Time",
+  "weight": 6.88,
+  "would_recommend": true}
+>>>
+>>> # Load the Zish string, to give us back the Python object
+>>> reloaded_book = loads(zish_str)
+>>> 
+>>> # Print the title
+>>> print(reloaded_book['title'])
+A Hero of Our Time
+
+....
+
+
+== Contributing
+
+Useful links:
+
+* http://www.antlr.org/api/Java/index.html?overview-summary.html[ANTLR JavaDocs]
+
+To run the tests:
+
+* Change to the `zish` directory: `cd zish`
+* Create a virtual environment: `virtualenv --python=python3 venv`
+* Active the virtual environment: `source venv/bin/activate`
+* Install tox: `pip install tox`
+* Run tox: `tox`
+
+The core parser is created using https://github.com/antlr/antlr4[ANTLR] from
+the Zish grammar. To create the parser files, go to the `antlr` directory and
+download the ANTLR jar and then run the following command:
+
+ java -jar antlr-4.7-complete.jar -Dlanguage=Python3 Zish.g4
+
+
+=== Making A New Release
+
+Run `tox` to make sure all tests pass, then update the `Release Notes` section
+then do:
+
+....
+git tag -a x.y.z -m "version x.y.z"
+python setup.py register sdist bdist_wheel upload --sign
+....
