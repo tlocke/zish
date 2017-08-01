@@ -3,10 +3,13 @@
 A data serialization format, designed to be an improvement on JSON. It adds
 timestamp, decimal and binary types, as well as multi-line strings.
 
+* File extension `.zish`
+* MIME type `application/zish` (suggested, not official or anything)
+
 
 == Zish Format
 
- Here's an example:
+Here's an example of Zish:
 
 ```
 // This is a comment
