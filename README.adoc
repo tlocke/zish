@@ -154,6 +154,11 @@ A Hero of Our Time
 * First public release. Passes all the tests.
 
 
+=== Version 0.0.1 (2017-08-03)
+
+* Fix bug where an EOF could cause an infinite loop.
+
+
 == Contributing
 
 Useful links:
