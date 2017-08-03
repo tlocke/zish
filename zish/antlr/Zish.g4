@@ -5,7 +5,7 @@ grammar Zish;
 // note that EOF is a concept for the grammar, technically Zish streams
 // are infinite
 start
-    : (ws* element)* ws*
+    : (ws* element)* ws* EOF
     ;
 
 element
@@ -341,7 +341,6 @@ WS
     : WS_NOT_NL
     | '\u000A' // line feed
     | '\u000D' // carriage return
-    | EOF
     ;
 
 fragment

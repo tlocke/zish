@@ -381,7 +381,10 @@ and this is the third line.
         # ERROR: missing element between commas
         (
             '[ 1, , 2 ]',
-            ZishException())])
+            ZishException()),
+
+        # Input string ending in a newline
+        ("{}\n", {})])
 def test_loads(zish_str, pyth):
     if isinstance(pyth, Exception):
         with pytest.raises(ZishException):
@@ -422,9 +425,10 @@ def test_dumps():
 
 '''
 def test_str():
-    pstr = '{ first : "Tom" , last: "Riddle" }'
+    pstr = """"""
+
     conv = loads(pstr)
-    assert conv == {'first': "Tom", 'last': "Riddle"}
+    assert conv == {'first': "a", 'last': "b"}
     for c in pstr:
         print(ord(c))
     for c in conv:
