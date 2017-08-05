@@ -34,7 +34,7 @@ Timestamp::
   Follows the https://tools.ietf.org/rfc/rfc3339.txt[RFC3339] format.
 
 The https://github.com/tlocke/zish/blob/master/zish/antlr/Zish.g4[formal
-specification] of Zish is an http://www.antlr.org/[ANTLR] grammar.
+specification of Zish] is an http://www.antlr.org/[ANTLR] grammar.
 
 
 == Motivation
