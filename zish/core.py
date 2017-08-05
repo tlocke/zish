@@ -86,7 +86,6 @@ def parse(node):
                 ZishParser.KeyContext,
                 ZishParser.ElementContext)):
 
-        children = []
         for c in node.getChildren():
             if isinstance(c, TerminalNodeImpl) and \
                     c.getPayload().type == ZishParser.EOF:
@@ -95,13 +94,8 @@ def parse(node):
                     c, (
                         ZishParser.WsContext)):
                 continue
+            return parse(c)
 
-            children.append(c)
-
-        if len(children) == 1:
-            return parse(children[0])
-        else:
-            raise ZishException("Thought there would always be one child.")
     elif isinstance(node, TerminalNodeImpl):
         token = node.getPayload()
         token_type = token.type

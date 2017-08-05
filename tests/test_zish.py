@@ -24,10 +24,10 @@ def test_dump():
         # Timestamp
         #
 
-        # Seconds are optional, but local offset is not
+        # Error: Seconds are not optional
         (
             '2007-02-23T12:14Z',
-            Datetime(2007, 2, 23, 12, 14, tzinfo=Timezone.utc)),
+            ZishException()),
 
         # A timestamp with millisecond precision and PST local time
         (
@@ -57,13 +57,13 @@ def test_dump():
 
         # Happy New Year in UTC, unknown local offset
         (
-            '2007-01-01T00:00-00:00',
+            '2007-01-01T00:00:00-00:00',
             Datetime(2007, 1, 1, tzinfo=Timezone.utc)),
 
-        # The same instant, with days precision, unknown local offset
+        # Error: Must have a time
         (
             '2007-01-01',
-            Datetime(2007, 1, 1, tzinfo=Timezone.utc)),
+            ZishException()),
 
         # The same value, different syntax.
         # Shouldn't actually be an error, but arrow says it is.
@@ -83,20 +83,20 @@ def test_dump():
             '2007T',
             Exception()),
 
-        # A day, unknown local offset
+        # Error: Must have a time part
         (
             '2007-02-23',
-            Datetime(2007, 2, 23, tzinfo=Timezone.utc)),
+            ZishException()),
 
-        # The same instant, but more precise and in UTC
+        # Error: Must have seconds
         (
             '2007-02-23T00:00Z',
-            Datetime(2007, 2, 23, tzinfo=Timezone.utc)),
+            ZishException()),
 
-        # An equivalent format for the same value
+        # Error: Must have seconds
         (
             '2007-02-23T00:00+00:00',
-            Datetime(2007, 2, 23, tzinfo=Timezone.utc)),
+            ZishException()),
 
         # The same instant, with seconds precision
         (

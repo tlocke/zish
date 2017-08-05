@@ -30,6 +30,9 @@ Here's an example of Zish:
   "would_recommend": true}
 ```
 
+Timestamp::
+  Follows the https://tools.ietf.org/rfc/rfc3339.txt[RFC3339] format.
+
 The https://github.com/tlocke/zish/blob/master/zish/antlr/Zish.g4[formal
 specification] of Zish is an http://www.antlr.org/[ANTLR] grammar.
 
@@ -149,14 +152,14 @@ A Hero of Our Time
 == Release Notes
 
 
-=== Version 0.0.0 (2017-08-01)
-
-* First public release. Passes all the tests.
-
-
 === Version 0.0.1 (2017-08-03)
 
 * Fix bug where an EOF could cause an infinite loop.
+
+
+=== Version 0.0.0 (2017-08-01)
+
+* First public release. Passes all the tests.
 
 
 == Contributing
@@ -169,7 +172,7 @@ To run the tests:
 
 * Change to the `zish` directory: `cd zish`
 * Create a virtual environment: `virtualenv --python=python3 venv`
-* Active the virtual environment: `source venv/bin/activate`
+* Activate the virtual environment: `source venv/bin/activate`
 * Install tox: `pip install tox`
 * Run tox: `tox`
 

@@ -5,7 +5,7 @@ grammar Zish;
 // note that EOF is a concept for the grammar, technically Zish streams
 // are infinite
 start
-    : (ws* element)* ws* EOF
+    : ws* element (ws+ element)* ws* EOF
     ;
 
 element
@@ -14,31 +14,63 @@ element
     ;
 
 list_type
-    : '[' ws* element (ws* ',' ws* element)* ws* ']'
-    | '[' ws* ']' 
+    : LIST_START ws* element (ws* COMMA ws* element)* ws* LIST_FINISH
+    | LIST_START ws* LIST_FINISH
+    ;
+
+LIST_START
+    : '['
+    ;
+
+LIST_FINISH
+    : ']'
     ;
 
 set_type
-    : '(' ws* key (ws* ',' ws* key)* ws* ')'
-    | '(' ws* ')' 
+    : SET_START ws* key (ws* COMMA ws* key)* ws* SET_FINISH
+    | SET_START ws* SET_FINISH
+    ;
+
+SET_START
+    : '('
+    ;
+
+SET_FINISH
+    : ')'
+    ;
+
+COMMA
+    : ','
     ;
 
 map_type
-    : '{' ws* pair (ws* ',' ws* pair)* ws* '}'
-    | '{' ws* '}'
+    : MAP_START ws* pair (ws* COMMA ws* pair)* ws* MAP_FINISH
+    | MAP_START ws* MAP_FINISH
+    ;
+
+MAP_START
+    : '{'
+    ;
+
+MAP_FINISH
+    : '}'
     ;
 
 pair
-    : key ws* ':' ws* element
+    : key ws* COLON ws* element
+    ;
+
+COLON
+    : ':'
     ;
 
 key
     : BOOL
     | NULL
+    | TIMESTAMP
     | BIN_INTEGER
     | DEC_INTEGER
     | HEX_INTEGER
-    | TIMESTAMP
     | FLOAT
     | DECIMAL
     | STRING
@@ -53,11 +85,6 @@ ws
     | BLOCK_COMMENT
     ;
 
-
-//////////////////////////////////////////////////////////////////////////////
-// Whitespace / Comments
-//////////////////////////////////////////////////////////////////////////////
-
 WHITESPACE
     : WS+
     ;
@@ -70,45 +97,23 @@ BLOCK_COMMENT
     : '/*' .*? '*/'
     ;
 
-//////////////////////////////////////////////////////////////////////////////
-// Null
-//////////////////////////////////////////////////////////////////////////////
-
 NULL
     : 'null'
     ;
 
-
-//////////////////////////////////////////////////////////////////////////////
-// Bool
-//////////////////////////////////////////////////////////////////////////////
 
 BOOL
     : 'true'
     | 'false'
     ;
 
-//////////////////////////////////////////////////////////////////////////////
-// Timestamp
-//////////////////////////////////////////////////////////////////////////////
-
 TIMESTAMP
-    : DATE ('T' TIME?)?
-    | YEAR '-' MONTH 'T'
-    | YEAR 'T'
-    ;
-
-fragment
-DATE
-    : YEAR '-' MONTH '-' DAY
+    : YEAR '-' MONTH '-' DAY [Tt] HOUR ':' MINUTE ':' SECOND OFFSET
     ;
 
 fragment
 YEAR
-    : '000'                     [1-9]
-    | '00'            [1-9]     DEC_DIGIT
-    | '0'   [1-9]     DEC_DIGIT DEC_DIGIT
-    | [1-9] DEC_DIGIT DEC_DIGIT DEC_DIGIT
+    : DEC_DIGIT DEC_DIGIT DEC_DIGIT DEC_DIGIT
     ;
 
 fragment
@@ -125,13 +130,8 @@ DAY
     ;
 
 fragment
-TIME
-    : HOUR ':' MINUTE (':' SECOND)? OFFSET
-    ;
-
-fragment
 OFFSET
-    : 'Z'
+    : [Zz]
     | PLUS_OR_MINUS HOUR ':' MINUTE
     ;
 
@@ -146,15 +146,10 @@ MINUTE
     : [0-5] DEC_DIGIT
     ;
 
-// note that W3C spec requires a digit after the '.'
 fragment
 SECOND
     : [0-5] DEC_DIGIT ('.' DEC_DIGIT+)?
     ;
-
-//////////////////////////////////////////////////////////////////////////////
-// Int
-//////////////////////////////////////////////////////////////////////////////
 
 BIN_INTEGER
     : '-'? '0' [bB] BINARY_DIGIT (UNDERSCORE? BINARY_DIGIT)*
@@ -167,10 +162,6 @@ DEC_INTEGER
 HEX_INTEGER
     : '-'? '0' [xX] HEX_DIGIT (UNDERSCORE? HEX_DIGIT)*
     ;
-
-//////////////////////////////////////////////////////////////////////////////
-// Float
-//////////////////////////////////////////////////////////////////////////////
 
 SPECIAL_FLOAT
     : PLUS_OR_MINUS 'inf'
@@ -186,10 +177,6 @@ FLOAT_EXP
     : [Ee] PLUS_OR_MINUS? DEC_DIGIT+
     ;
 
-//////////////////////////////////////////////////////////////////////////////
-// Decimal
-//////////////////////////////////////////////////////////////////////////////
-
 DECIMAL
     : DEC_INTEGER DEC_FRAC? DECIMAL_EXP?
     ;
@@ -198,11 +185,6 @@ fragment
 DECIMAL_EXP
     : [Dd] PLUS_OR_MINUS? DEC_DIGIT+
     ;
-
-
-//////////////////////////////////////////////////////////////////////////////
-// String
-//////////////////////////////////////////////////////////////////////////////
 
 STRING
     : '"' STRING_TEXT '"'
@@ -223,10 +205,6 @@ fragment
 TEXT_ESCAPE
     : COMMON_ESCAPE | HEX_ESCAPE | UNICODE_ESCAPE
     ;
-
-//////////////////////////////////////////////////////////////////////////////
-// BLOB
-//////////////////////////////////////////////////////////////////////////////
 
 BLOB
     : '\'' (BASE_64_QUARTET | WS)* BASE_64_PAD? WS* '\''
@@ -257,11 +235,6 @@ fragment
 BASE_64_CHAR
     : [0-9a-zA-Z+/]
     ;
-
-//////////////////////////////////////////////////////////////////////////////
-// Common Lexer Primitives
-//////////////////////////////////////////////////////////////////////////////
-
 
 // Zish does not allow leading zeros for base-10 numbers
 fragment
