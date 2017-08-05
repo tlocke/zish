@@ -152,6 +152,11 @@ A Hero of Our Time
 == Release Notes
 
 
+=== Version 0.0.2 (2017-08-05)
+
+* Now uses RFC3339 for timestamps.
+
+
 === Version 0.0.1 (2017-08-03)
 
 * Fix bug where an EOF could cause an infinite loop.
