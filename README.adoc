@@ -1,4 +1,5 @@
 = Zish
+:toc: preamble
 
 A data serialization format, designed to be an improvement on JSON. It adds
 timestamp, decimal and binary types, as well as multi-line strings.
@@ -31,7 +32,59 @@ Here's an example of Zish:
 ```
 
 Timestamp::
-  Follows the https://tools.ietf.org/rfc/rfc3339.txt[RFC3339] format.
+  Follows the https://tools.ietf.org/rfc/rfc3339.txt[RFC3339] format. Eg.
+  `2017-08-09T10:40:09Z`, `2017-08-09T10:40:09.037Z`.
+String::
+  Strings are delimited by a double-quote character `"`, and can contain line
+  breaks. If you need to write a string that contains a `"` then escape it with
+  a backslash by doing `\"`. There are other escapes allowed in strings. Here's
+  the full list: +
+|===
+| Escape | Description | ASCII Hex Value
+
+| `\a`
+| Alert (beep sound)
+| 07
+
+| `\b`
+| Backspace
+| 08
+
+| `\t`
+| Horizontal tab
+| 09
+
+| `\n`
+| Linefeed
+| 0A
+
+| `\v`
+| Virtical tab
+| 0B
+
+| `\f`
+| Formfeed
+| 0C
+
+| `\r`
+| Carriage return
+| 0D
+
+| `\"`
+| Double quotation mark
+| 22
+
+| `\\`
+| Backslash
+| 5C
+
+| `\` followed by either a Carriage Return or Linefeed, or
+  Carriage Return then Linefeed.
+
+| A backslash before a newline sequence is a way to remove a newline.
+|
+|===
+
 
 The https://github.com/tlocke/zish/blob/master/zish/antlr/Zish.g4[formal
 specification of Zish] is an http://www.antlr.org/[ANTLR] grammar.
@@ -150,6 +203,12 @@ A Hero of Our Time
 
 
 == Release Notes
+
+
+=== Version 0.0.3 (2017-08-09)
+
+* Fixed bug where interpreter couldn't find the `zish.antlr` package in eggs.
+* Removed a few superfluous escape sequences.
 
 
 === Version 0.0.2 (2017-08-05)
