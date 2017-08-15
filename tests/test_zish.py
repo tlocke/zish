@@ -148,20 +148,20 @@ def test_dump():
         # Another negative int
         ('-123', -123),
 
-        # An int denoted in hexadecimal
-        ('0xBeef', 0xBeef),
+        # Error: An int can't be denoted in hexadecimal
+        ('0xBeef', ZishException()),
 
-        # An int denoted in binary
-        ('0b0101', 0b0101),
+        # Error: An int can't be denoted in binary
+        ('0b0101', ZishException()),
 
-        # An int with underscores
-        ('1_2_3', 123),
+        # Error: An int can't have underscores
+        ('1_2_3', ZishException()),
 
-        # An int denoted in hexadecimal with underscores
-        ('0xFA_CE', 0xFACE),
+        # Error: An int can't be denoted in hexadecimal with underscores
+        ('0xFA_CE', ZishException()),
 
-        # An int denoted in binary with underscores
-        ('0b10_10_10', 0b101010),
+        # Error: An int can't be denoted in binary with underscores
+        ('0b10_10_10', ZishException()),
 
         # ERROR: leading plus not allowed
         ('+1', ZishException()),
@@ -197,10 +197,17 @@ def test_dump():
         ('-0.12d4', Decimal('-0.12e4')),
 
         # Zero as float
-        ('0E0', float(0)),
+        ('0e0', float(0)),
+
+        # Error: Zero as float can't have uppercase 'E' in exponent.
+        ('0E0', ZishException()),
+
 
         # Zero as decimal
-        ('0D0', Decimal('0')),
+        ('0d0', Decimal('0')),
+
+        # Error: Zero as decimal can't have uppercase 'D' in exponent.
+        ('0D0', ZishException()),
 
         #   ...the same value with different notation
         ('0.', Decimal('0')),
@@ -217,8 +224,8 @@ def test_dump():
         # Decimal maintains precision: -0. != -0.0
         ('-0d-1', Decimal('-0.0')),
 
-        # Decimal with underscores
-        ('123_456.789_012', Decimal('123456.789012')),
+        # Error: Decimal can't have underscores
+        ('123_456.789_012', ZishException()),
 
         # ERROR: underscores may not appear next to the decimal point
         ('123_._456', ZishException()),
@@ -417,7 +424,7 @@ def test_dumps():
     "novel",
     "19th centuary"],
   "title": "A Hero of Our Time",
-  "weight": 6.88,
+  "weight": 6.88e0,
   "would_recommend": true}"""
 
     assert dumps(book) == zish_str

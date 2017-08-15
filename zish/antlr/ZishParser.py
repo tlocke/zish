@@ -7,8 +7,8 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30")
-        buf.write("\u00d9\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\26")
+        buf.write("\u00d7\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\3\2\7\2\24\n\2\f\2\16\2\27\13\2\3\2\3")
         buf.write("\2\6\2\33\n\2\r\2\16\2\34\3\2\3\2\7\2!\n\2\f\2\16\2$\13")
         buf.write("\2\3\2\7\2\'\n\2\f\2\16\2*\13\2\3\2\3\2\3\3\3\3\5\3\60")
@@ -27,38 +27,38 @@ def serializedATN():
         buf.write("\6\3\6\7\6\u00b1\n\6\f\6\16\6\u00b4\13\6\3\6\5\6\u00b7")
         buf.write("\n\6\3\7\3\7\7\7\u00bb\n\7\f\7\16\7\u00be\13\7\3\7\3\7")
         buf.write("\7\7\u00c2\n\7\f\7\16\7\u00c5\13\7\3\7\3\7\3\b\3\b\3\b")
-        buf.write("\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\b\u00d5\n\b\3\t")
-        buf.write("\3\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\3\3\2\13\r\2\u00f7")
-        buf.write("\2\25\3\2\2\2\4/\3\2\2\2\6\\\3\2\2\2\b\u0089\3\2\2\2\n")
-        buf.write("\u00b6\3\2\2\2\f\u00b8\3\2\2\2\16\u00d4\3\2\2\2\20\u00d6")
-        buf.write("\3\2\2\2\22\24\5\20\t\2\23\22\3\2\2\2\24\27\3\2\2\2\25")
-        buf.write("\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2\27\25\3\2\2\2")
-        buf.write("\30\"\5\4\3\2\31\33\5\20\t\2\32\31\3\2\2\2\33\34\3\2\2")
-        buf.write("\2\34\32\3\2\2\2\34\35\3\2\2\2\35\36\3\2\2\2\36\37\5\4")
-        buf.write("\3\2\37!\3\2\2\2 \32\3\2\2\2!$\3\2\2\2\" \3\2\2\2\"#\3")
-        buf.write("\2\2\2#(\3\2\2\2$\"\3\2\2\2%\'\5\20\t\2&%\3\2\2\2\'*\3")
-        buf.write("\2\2\2(&\3\2\2\2()\3\2\2\2)+\3\2\2\2*(\3\2\2\2+,\7\2\2")
-        buf.write("\3,\3\3\2\2\2-\60\5\16\b\2.\60\5\n\6\2/-\3\2\2\2/.\3\2")
-        buf.write("\2\2\60\5\3\2\2\2\61\65\7\3\2\2\62\64\5\20\t\2\63\62\3")
-        buf.write("\2\2\2\64\67\3\2\2\2\65\63\3\2\2\2\65\66\3\2\2\2\668\3")
-        buf.write("\2\2\2\67\65\3\2\2\28I\5\4\3\29;\5\20\t\2:9\3\2\2\2;>")
-        buf.write("\3\2\2\2<:\3\2\2\2<=\3\2\2\2=?\3\2\2\2><\3\2\2\2?C\7\7")
-        buf.write("\2\2@B\5\20\t\2A@\3\2\2\2BE\3\2\2\2CA\3\2\2\2CD\3\2\2")
-        buf.write("\2DF\3\2\2\2EC\3\2\2\2FH\5\4\3\2G<\3\2\2\2HK\3\2\2\2I")
-        buf.write("G\3\2\2\2IJ\3\2\2\2JO\3\2\2\2KI\3\2\2\2LN\5\20\t\2ML\3")
-        buf.write("\2\2\2NQ\3\2\2\2OM\3\2\2\2OP\3\2\2\2PR\3\2\2\2QO\3\2\2")
-        buf.write("\2RS\7\4\2\2S]\3\2\2\2TX\7\3\2\2UW\5\20\t\2VU\3\2\2\2")
-        buf.write("WZ\3\2\2\2XV\3\2\2\2XY\3\2\2\2Y[\3\2\2\2ZX\3\2\2\2[]\7")
-        buf.write("\4\2\2\\\61\3\2\2\2\\T\3\2\2\2]\7\3\2\2\2^b\7\5\2\2_a")
-        buf.write("\5\20\t\2`_\3\2\2\2ad\3\2\2\2b`\3\2\2\2bc\3\2\2\2ce\3")
-        buf.write("\2\2\2db\3\2\2\2ev\5\16\b\2fh\5\20\t\2gf\3\2\2\2hk\3\2")
-        buf.write("\2\2ig\3\2\2\2ij\3\2\2\2jl\3\2\2\2ki\3\2\2\2lp\7\7\2\2")
-        buf.write("mo\5\20\t\2nm\3\2\2\2or\3\2\2\2pn\3\2\2\2pq\3\2\2\2qs")
-        buf.write("\3\2\2\2rp\3\2\2\2su\5\16\b\2ti\3\2\2\2ux\3\2\2\2vt\3")
-        buf.write("\2\2\2vw\3\2\2\2w|\3\2\2\2xv\3\2\2\2y{\5\20\t\2zy\3\2")
-        buf.write("\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\177\3\2\2\2~|\3\2")
-        buf.write("\2\2\177\u0080\7\6\2\2\u0080\u008a\3\2\2\2\u0081\u0085")
-        buf.write("\7\5\2\2\u0082\u0084\5\20\t\2\u0083\u0082\3\2\2\2\u0084")
+        buf.write("\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\b\u00d3\n\b\3\t\3\t\3\t")
+        buf.write("\2\2\n\2\4\6\b\n\f\16\20\2\3\3\2\13\r\2\u00f3\2\25\3\2")
+        buf.write("\2\2\4/\3\2\2\2\6\\\3\2\2\2\b\u0089\3\2\2\2\n\u00b6\3")
+        buf.write("\2\2\2\f\u00b8\3\2\2\2\16\u00d2\3\2\2\2\20\u00d4\3\2\2")
+        buf.write("\2\22\24\5\20\t\2\23\22\3\2\2\2\24\27\3\2\2\2\25\23\3")
+        buf.write("\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2\27\25\3\2\2\2\30\"")
+        buf.write("\5\4\3\2\31\33\5\20\t\2\32\31\3\2\2\2\33\34\3\2\2\2\34")
+        buf.write("\32\3\2\2\2\34\35\3\2\2\2\35\36\3\2\2\2\36\37\5\4\3\2")
+        buf.write("\37!\3\2\2\2 \32\3\2\2\2!$\3\2\2\2\" \3\2\2\2\"#\3\2\2")
+        buf.write("\2#(\3\2\2\2$\"\3\2\2\2%\'\5\20\t\2&%\3\2\2\2\'*\3\2\2")
+        buf.write("\2(&\3\2\2\2()\3\2\2\2)+\3\2\2\2*(\3\2\2\2+,\7\2\2\3,")
+        buf.write("\3\3\2\2\2-\60\5\16\b\2.\60\5\n\6\2/-\3\2\2\2/.\3\2\2")
+        buf.write("\2\60\5\3\2\2\2\61\65\7\3\2\2\62\64\5\20\t\2\63\62\3\2")
+        buf.write("\2\2\64\67\3\2\2\2\65\63\3\2\2\2\65\66\3\2\2\2\668\3\2")
+        buf.write("\2\2\67\65\3\2\2\28I\5\4\3\29;\5\20\t\2:9\3\2\2\2;>\3")
+        buf.write("\2\2\2<:\3\2\2\2<=\3\2\2\2=?\3\2\2\2><\3\2\2\2?C\7\7\2")
+        buf.write("\2@B\5\20\t\2A@\3\2\2\2BE\3\2\2\2CA\3\2\2\2CD\3\2\2\2")
+        buf.write("DF\3\2\2\2EC\3\2\2\2FH\5\4\3\2G<\3\2\2\2HK\3\2\2\2IG\3")
+        buf.write("\2\2\2IJ\3\2\2\2JO\3\2\2\2KI\3\2\2\2LN\5\20\t\2ML\3\2")
+        buf.write("\2\2NQ\3\2\2\2OM\3\2\2\2OP\3\2\2\2PR\3\2\2\2QO\3\2\2\2")
+        buf.write("RS\7\4\2\2S]\3\2\2\2TX\7\3\2\2UW\5\20\t\2VU\3\2\2\2WZ")
+        buf.write("\3\2\2\2XV\3\2\2\2XY\3\2\2\2Y[\3\2\2\2ZX\3\2\2\2[]\7\4")
+        buf.write("\2\2\\\61\3\2\2\2\\T\3\2\2\2]\7\3\2\2\2^b\7\5\2\2_a\5")
+        buf.write("\20\t\2`_\3\2\2\2ad\3\2\2\2b`\3\2\2\2bc\3\2\2\2ce\3\2")
+        buf.write("\2\2db\3\2\2\2ev\5\16\b\2fh\5\20\t\2gf\3\2\2\2hk\3\2\2")
+        buf.write("\2ig\3\2\2\2ij\3\2\2\2jl\3\2\2\2ki\3\2\2\2lp\7\7\2\2m")
+        buf.write("o\5\20\t\2nm\3\2\2\2or\3\2\2\2pn\3\2\2\2pq\3\2\2\2qs\3")
+        buf.write("\2\2\2rp\3\2\2\2su\5\16\b\2ti\3\2\2\2ux\3\2\2\2vt\3\2")
+        buf.write("\2\2vw\3\2\2\2w|\3\2\2\2xv\3\2\2\2y{\5\20\t\2zy\3\2\2")
+        buf.write("\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\177\3\2\2\2~|\3\2\2")
+        buf.write("\2\177\u0080\7\6\2\2\u0080\u008a\3\2\2\2\u0081\u0085\7")
+        buf.write("\5\2\2\u0082\u0084\5\20\t\2\u0083\u0082\3\2\2\2\u0084")
         buf.write("\u0087\3\2\2\2\u0085\u0083\3\2\2\2\u0085\u0086\3\2\2\2")
         buf.write("\u0086\u0088\3\2\2\2\u0087\u0085\3\2\2\2\u0088\u008a\7")
         buf.write("\6\2\2\u0089^\3\2\2\2\u0089\u0081\3\2\2\2\u008a\t\3\2")
@@ -87,19 +87,17 @@ def serializedATN():
         buf.write("\2\2\2\u00bf\u00c3\7\n\2\2\u00c0\u00c2\5\20\t\2\u00c1")
         buf.write("\u00c0\3\2\2\2\u00c2\u00c5\3\2\2\2\u00c3\u00c1\3\2\2\2")
         buf.write("\u00c3\u00c4\3\2\2\2\u00c4\u00c6\3\2\2\2\u00c5\u00c3\3")
-        buf.write("\2\2\2\u00c6\u00c7\5\4\3\2\u00c7\r\3\2\2\2\u00c8\u00d5")
-        buf.write("\7\17\2\2\u00c9\u00d5\7\16\2\2\u00ca\u00d5\7\20\2\2\u00cb")
-        buf.write("\u00d5\7\21\2\2\u00cc\u00d5\7\22\2\2\u00cd\u00d5\7\23")
-        buf.write("\2\2\u00ce\u00d5\7\25\2\2\u00cf\u00d5\7\26\2\2\u00d0\u00d5")
-        buf.write("\7\27\2\2\u00d1\u00d5\7\30\2\2\u00d2\u00d5\5\6\4\2\u00d3")
-        buf.write("\u00d5\5\b\5\2\u00d4\u00c8\3\2\2\2\u00d4\u00c9\3\2\2\2")
-        buf.write("\u00d4\u00ca\3\2\2\2\u00d4\u00cb\3\2\2\2\u00d4\u00cc\3")
-        buf.write("\2\2\2\u00d4\u00cd\3\2\2\2\u00d4\u00ce\3\2\2\2\u00d4\u00cf")
-        buf.write("\3\2\2\2\u00d4\u00d0\3\2\2\2\u00d4\u00d1\3\2\2\2\u00d4")
-        buf.write("\u00d2\3\2\2\2\u00d4\u00d3\3\2\2\2\u00d5\17\3\2\2\2\u00d6")
-        buf.write("\u00d7\t\2\2\2\u00d7\21\3\2\2\2\37\25\34\"(/\65<CIOX\\")
-        buf.write("bipv|\u0085\u0089\u008f\u0096\u009d\u00a3\u00a9\u00b2")
-        buf.write("\u00b6\u00bc\u00c3\u00d4")
+        buf.write("\2\2\2\u00c6\u00c7\5\4\3\2\u00c7\r\3\2\2\2\u00c8\u00d3")
+        buf.write("\7\17\2\2\u00c9\u00d3\7\16\2\2\u00ca\u00d3\7\20\2\2\u00cb")
+        buf.write("\u00d3\7\21\2\2\u00cc\u00d3\7\23\2\2\u00cd\u00d3\7\24")
+        buf.write("\2\2\u00ce\u00d3\7\25\2\2\u00cf\u00d3\7\26\2\2\u00d0\u00d3")
+        buf.write("\5\6\4\2\u00d1\u00d3\5\b\5\2\u00d2\u00c8\3\2\2\2\u00d2")
+        buf.write("\u00c9\3\2\2\2\u00d2\u00ca\3\2\2\2\u00d2\u00cb\3\2\2\2")
+        buf.write("\u00d2\u00cc\3\2\2\2\u00d2\u00cd\3\2\2\2\u00d2\u00ce\3")
+        buf.write("\2\2\2\u00d2\u00cf\3\2\2\2\u00d2\u00d0\3\2\2\2\u00d2\u00d1")
+        buf.write("\3\2\2\2\u00d3\17\3\2\2\2\u00d4\u00d5\t\2\2\2\u00d5\21")
+        buf.write("\3\2\2\2\37\25\34\"(/\65<CIOX\\bipv|\u0085\u0089\u008f")
+        buf.write("\u0096\u009d\u00a3\u00a9\u00b2\u00b6\u00bc\u00c3\u00d2")
         return buf.getvalue()
 
 
@@ -120,9 +118,8 @@ class ZishParser ( Parser ):
     symbolicNames = [ "<INVALID>", "LIST_START", "LIST_FINISH", "SET_START", 
                       "SET_FINISH", "COMMA", "MAP_START", "MAP_FINISH", 
                       "COLON", "WHITESPACE", "INLINE_COMMENT", "BLOCK_COMMENT", 
-                      "NULL", "BOOL", "TIMESTAMP", "BIN_INTEGER", "DEC_INTEGER", 
-                      "HEX_INTEGER", "SPECIAL_FLOAT", "FLOAT", "DECIMAL", 
-                      "STRING", "BLOB" ]
+                      "NULL", "BOOL", "TIMESTAMP", "INTEGER", "UNSIGNED_INTEGER", 
+                      "FLOAT", "DECIMAL", "STRING", "BLOB" ]
 
     RULE_start = 0
     RULE_element = 1
@@ -151,14 +148,12 @@ class ZishParser ( Parser ):
     NULL=12
     BOOL=13
     TIMESTAMP=14
-    BIN_INTEGER=15
-    DEC_INTEGER=16
-    HEX_INTEGER=17
-    SPECIAL_FLOAT=18
-    FLOAT=19
-    DECIMAL=20
-    STRING=21
-    BLOB=22
+    INTEGER=15
+    UNSIGNED_INTEGER=16
+    FLOAT=17
+    DECIMAL=18
+    STRING=19
+    BLOB=20
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -303,7 +298,7 @@ class ZishParser ( Parser ):
             self.state = 45
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [ZishParser.LIST_START, ZishParser.SET_START, ZishParser.NULL, ZishParser.BOOL, ZishParser.TIMESTAMP, ZishParser.BIN_INTEGER, ZishParser.DEC_INTEGER, ZishParser.HEX_INTEGER, ZishParser.FLOAT, ZishParser.DECIMAL, ZishParser.STRING, ZishParser.BLOB]:
+            if token in [ZishParser.LIST_START, ZishParser.SET_START, ZishParser.NULL, ZishParser.BOOL, ZishParser.TIMESTAMP, ZishParser.INTEGER, ZishParser.FLOAT, ZishParser.DECIMAL, ZishParser.STRING, ZishParser.BLOB]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 43
                 self.key()
@@ -853,14 +848,8 @@ class ZishParser ( Parser ):
         def TIMESTAMP(self):
             return self.getToken(ZishParser.TIMESTAMP, 0)
 
-        def BIN_INTEGER(self):
-            return self.getToken(ZishParser.BIN_INTEGER, 0)
-
-        def DEC_INTEGER(self):
-            return self.getToken(ZishParser.DEC_INTEGER, 0)
-
-        def HEX_INTEGER(self):
-            return self.getToken(ZishParser.HEX_INTEGER, 0)
+        def INTEGER(self):
+            return self.getToken(ZishParser.INTEGER, 0)
 
         def FLOAT(self):
             return self.getToken(ZishParser.FLOAT, 0)
@@ -901,7 +890,7 @@ class ZishParser ( Parser ):
         localctx = ZishParser.KeyContext(self, self._ctx, self.state)
         self.enterRule(localctx, 12, self.RULE_key)
         try:
-            self.state = 210
+            self.state = 208
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [ZishParser.BOOL]:
@@ -919,49 +908,39 @@ class ZishParser ( Parser ):
                 self.state = 200
                 self.match(ZishParser.TIMESTAMP)
                 pass
-            elif token in [ZishParser.BIN_INTEGER]:
+            elif token in [ZishParser.INTEGER]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 201
-                self.match(ZishParser.BIN_INTEGER)
-                pass
-            elif token in [ZishParser.DEC_INTEGER]:
-                self.enterOuterAlt(localctx, 5)
-                self.state = 202
-                self.match(ZishParser.DEC_INTEGER)
-                pass
-            elif token in [ZishParser.HEX_INTEGER]:
-                self.enterOuterAlt(localctx, 6)
-                self.state = 203
-                self.match(ZishParser.HEX_INTEGER)
+                self.match(ZishParser.INTEGER)
                 pass
             elif token in [ZishParser.FLOAT]:
-                self.enterOuterAlt(localctx, 7)
-                self.state = 204
+                self.enterOuterAlt(localctx, 5)
+                self.state = 202
                 self.match(ZishParser.FLOAT)
                 pass
             elif token in [ZishParser.DECIMAL]:
-                self.enterOuterAlt(localctx, 8)
-                self.state = 205
+                self.enterOuterAlt(localctx, 6)
+                self.state = 203
                 self.match(ZishParser.DECIMAL)
                 pass
             elif token in [ZishParser.STRING]:
-                self.enterOuterAlt(localctx, 9)
-                self.state = 206
+                self.enterOuterAlt(localctx, 7)
+                self.state = 204
                 self.match(ZishParser.STRING)
                 pass
             elif token in [ZishParser.BLOB]:
-                self.enterOuterAlt(localctx, 10)
-                self.state = 207
+                self.enterOuterAlt(localctx, 8)
+                self.state = 205
                 self.match(ZishParser.BLOB)
                 pass
             elif token in [ZishParser.LIST_START]:
-                self.enterOuterAlt(localctx, 11)
-                self.state = 208
+                self.enterOuterAlt(localctx, 9)
+                self.state = 206
                 self.list_type()
                 pass
             elif token in [ZishParser.SET_START]:
-                self.enterOuterAlt(localctx, 12)
-                self.state = 209
+                self.enterOuterAlt(localctx, 10)
+                self.state = 207
                 self.set_type()
                 pass
             else:
@@ -1011,7 +990,7 @@ class ZishParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 212
+            self.state = 210
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ZishParser.WHITESPACE) | (1 << ZishParser.INLINE_COMMENT) | (1 << ZishParser.BLOCK_COMMENT))) != 0)):
                 self._errHandler.recoverInline(self)

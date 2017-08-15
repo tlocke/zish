@@ -50,9 +50,6 @@ def loads(zish_str):
     return parse(tree)
 
 
-_trans_dec = str.maketrans('dD', 'ee', '_')
-
-
 def parse(node):
     # print("parse start")
     # print(str(type(node)))
@@ -114,16 +111,14 @@ def parse(node):
         elif token_type == ZishParser.BOOL:
             return token.text == 'true'
 
-        elif token_type in (
-                ZishParser.BIN_INTEGER, ZishParser.DEC_INTEGER,
-                ZishParser.HEX_INTEGER):
-            return int(token.text.replace('_', ''), 0)
+        elif token_type == ZishParser.INTEGER:
+            return int(token.text)
 
         elif token_type == ZishParser.DECIMAL:
-            return Decimal(token.text.translate(_trans_dec))
+            return Decimal(token.text.replace('d', 'e'))
 
         elif token_type == ZishParser.FLOAT:
-            return float(token.text.replace('_', ''))
+            return float(token.text)
 
         elif token_type == ZishParser.STRING:
             return unescape(token.text[1:-1])
@@ -200,8 +195,16 @@ def _dump(obj, indent):
         new_indent = indent + '  '
         b = ','.join('\n' + new_indent + _dump(v, new_indent) for v in obj)
         return '[' + b + ']'
-    elif isinstance(obj, (int, float, Decimal)):
+    elif isinstance(obj, int):
         return str(obj)
+    elif isinstance(obj, float):
+        val = str(obj)
+        if 'e' not in val:
+            return val + 'e0'
+        else:
+            return val
+    elif isinstance(obj, Decimal):
+        return str(obj).replace('e', 'd')
     elif obj is None:
         return 'null'
     elif isinstance(obj, str):

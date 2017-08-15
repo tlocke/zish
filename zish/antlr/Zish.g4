@@ -68,9 +68,7 @@ key
     : BOOL
     | NULL
     | TIMESTAMP
-    | BIN_INTEGER
-    | DEC_INTEGER
-    | HEX_INTEGER
+    | INTEGER
     | FLOAT
     | DECIMAL
     | STRING
@@ -113,7 +111,7 @@ TIMESTAMP
 
 fragment
 YEAR
-    : DEC_DIGIT DEC_DIGIT DEC_DIGIT DEC_DIGIT
+    : DIGIT DIGIT DIGIT DIGIT
     ;
 
 fragment
@@ -125,7 +123,7 @@ MONTH
 fragment
 DAY
     : '0'   [1-9]
-    | [1-2] DEC_DIGIT
+    | [1-2] DIGIT
     | '3'   [0-1]
     ;
 
@@ -137,73 +135,57 @@ OFFSET
 
 fragment
 HOUR
-    : [01] DEC_DIGIT
+    : [01] DIGIT
     | '2' [0-3]
     ;
 
 fragment
 MINUTE
-    : [0-5] DEC_DIGIT
+    : [0-5] DIGIT
     ;
 
 fragment
 SECOND
-    : [0-5] DEC_DIGIT ('.' DEC_DIGIT+)?
+    : [0-5] DIGIT ('.' DIGIT+)?
     ;
 
-BIN_INTEGER
-    : '-'? '0' [bB] BINARY_DIGIT (UNDERSCORE? BINARY_DIGIT)*
+INTEGER
+    : '-'? UNSIGNED_INTEGER
     ;
 
-DEC_INTEGER
-    : '-'? DEC_UNSIGNED_INTEGER
-    ;
-
-HEX_INTEGER
-    : '-'? '0' [xX] HEX_DIGIT (UNDERSCORE? HEX_DIGIT)*
-    ;
-
-SPECIAL_FLOAT
-    : PLUS_OR_MINUS 'inf'
-    | 'nan'
+UNSIGNED_INTEGER
+    : '0'
+    | [1-9] DIGIT*
     ;
 
 FLOAT
-    : DEC_INTEGER DEC_FRAC? FLOAT_EXP
+    : INTEGER FRAC? FLOAT_EXP
+    | PLUS_OR_MINUS 'inf'
+    | 'nan'
     ;
 
 fragment
 FLOAT_EXP
-    : [Ee] PLUS_OR_MINUS? DEC_DIGIT+
+    : 'e' PLUS_OR_MINUS? DIGIT+
     ;
 
 DECIMAL
-    : DEC_INTEGER DEC_FRAC? DECIMAL_EXP?
+    : INTEGER FRAC? DECIMAL_EXP?
     ;
 
 fragment
 DECIMAL_EXP
-    : [Dd] PLUS_OR_MINUS? DEC_DIGIT+
+    : 'd' PLUS_OR_MINUS? DIGIT+
     ;
 
 STRING
-    : '"' STRING_TEXT '"'
-    ;
-
-fragment
-STRING_TEXT
-    : (TEXT_ESCAPE | STRING_TEXT_ALLOWED)*?
+    : '"' (COMMON_ESCAPE | UNICODE_ESCAPE | STRING_TEXT_ALLOWED)*? '"'
     ;
 
 // non-control Unicode (newlines are OK)
 fragment
 STRING_TEXT_ALLOWED
     : ~[\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u000E\u000F\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F\u005C]
-    ;
-
-fragment
-TEXT_ESCAPE
-    : COMMON_ESCAPE | HEX_ESCAPE | UNICODE_ESCAPE
     ;
 
 BLOB
@@ -236,32 +218,15 @@ BASE_64_CHAR
     : [0-9a-zA-Z+/]
     ;
 
-// Zish does not allow leading zeros for base-10 numbers
 fragment
-DEC_UNSIGNED_INTEGER
-    : '0'
-    | [1-9] (UNDERSCORE? DEC_DIGIT)*
-    ;
-
-fragment
-DEC_FRAC
+FRAC
     : '.'
-    | '.' DEC_DIGIT (UNDERSCORE? DEC_DIGIT)*
+    | '.' DIGIT (UNDERSCORE? DIGIT)*
     ;
 
 fragment
-DEC_DIGIT
+DIGIT
     : [0-9]
-    ;
-
-fragment
-HEX_DIGIT
-    : [0-9a-fA-F]
-    ;
-
-fragment
-BINARY_DIGIT
-    : [01]
     ;
 
 fragment
@@ -290,11 +255,6 @@ COMMON_ESCAPE_CODE
     ;
 
 fragment
-HEX_ESCAPE
-    : '\\x' HEX_DIGIT HEX_DIGIT
-    ;
-
-fragment
 UNICODE_ESCAPE
     : '\\u'     HEX_DIGIT_QUARTET
     | '\\U000'  HEX_DIGIT_QUARTET HEX_DIGIT 
@@ -304,6 +264,11 @@ UNICODE_ESCAPE
 fragment
 HEX_DIGIT_QUARTET
     : HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+    ;
+
+fragment
+HEX_DIGIT
+    : [0-9a-fA-F]
     ;
 
 fragment

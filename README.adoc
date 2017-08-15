@@ -31,14 +31,25 @@ Here's an example of Zish:
   "would_recommend": true}
 ```
 
-Timestamp::
-  Follows the https://tools.ietf.org/rfc/rfc3339.txt[RFC3339] format. Eg.
-  `2017-08-09T10:40:09Z`, `2017-08-09T10:40:09.037Z`.
-String::
-  Strings are delimited by a double-quote character `"`, and can contain line
-  breaks. If you need to write a string that contains a `"` then escape it with
-  a backslash by doing `\"`. There are other escapes allowed in strings. Here's
-  the full list: +
+Zish is a valid stream of Unicode code points encoded in UTF-8. The
+https://github.com/tlocke/zish/blob/master/zish/antlr/Zish.g4[formal
+specification of Zish] is an http://www.antlr.org/[ANTLR] grammar. Zish has the
+following data types:
+
+
+=== Timestamp
+
+Follows the https://tools.ietf.org/rfc/rfc3339.txt[RFC3339] format. Eg.
+`2017-08-09T10:40:09Z`, `2017-08-09T10:40:09.037Z`.
+
+
+=== String
+
+Strings are sequences of Unicode characters and are delimited by a
+double-quote character `"`, and can contain line breaks. If you need to write
+a string that contains a `"` then escape it with a backslash by doing `\"`.
+There are other escapes allowed in strings. Here's the full list:
+
 |===
 | Escape | Description | ASCII Hex Value
 
@@ -80,14 +91,67 @@ String::
 
 | `\` followed by either a Carriage Return or Linefeed, or
   Carriage Return then Linefeed.
-
 | A backslash before a newline sequence is a way to remove a newline.
 |
+
+| `\u` followed by four hex digits.
+| A unicode code point.
+|
+
+| `\U` followed by eight hex digits.
+| A unicode code point.
+|
+
+| 
 |===
 
 
-The https://github.com/tlocke/zish/blob/master/zish/antlr/Zish.g4[formal
-specification of Zish] is an http://www.antlr.org/[ANTLR] grammar.
+=== Integer
+
+Integers can't begin with a `+`, and integers with more than one digit can't
+begin with a zero. Examples of valid integers are: +
+
+* `0`
+* `-0`
+* `389`
+* `-589`
+
+
+=== Decimal
+
+A https://en.wikipedia.org/wiki/Decimal_data_type[decimal] is a lossless
+representation of a real number. The exponent starts with a `d`. Examples are:
+
+* `0.993`
+* `1.78d-1`
+
+
+=== Float
+
+A lossy representation of a real number. The exponent starts with an `e`. It
+can have the special values `+inf`, `-inf` and `nan`. Examples are:
+
+* `-0.7e4`
+* `3.141e0`
+
+
+=== List
+
+A https://en.wikipedia.org/wiki/List_(abstract_data_type)[list] is an ordered
+sequence of values, where the same value may occur more than once. Lists
+begin with a `[` and end with a `]` and the values are separated by `,`. An
+example is: `[56, "pod", 0]`. An element of a list can be any Zish type
+including a list or map.
+
+
+=== Map
+
+A https://en.wikipedia.org/wiki/Associative_array[map] is an unordered
+collection of key / value pairs. Duplicate keys aren't allowed. Maps start
+with a `{` and end with a `}`. The pairs are separated by a `,` and the key
+is separated from the value with a `:`. The value part of a pair can be any
+Zish type, and the key part of a pair can be any Zish type except a map. An
+example of a map is: `{"hello": 90, true: "larch", 5: [null]}`.
 
 
 == Motivation
@@ -141,7 +205,7 @@ image:https://travis-ci.org/tlocke/zish.svg?branch=master["Build Status",
 link="https://travis-ci.org/tlocke/zish"]
 
 
-== Installation
+=== Installation
 
 It's a good idea to set up a virtualenv:
 
@@ -153,7 +217,7 @@ then install Zish with pip:
  pip install zish
 
 
-== Quickstart
+=== Quickstart
 
 To go from a Python object to an Zish string use `zish.dumps`. To go from an
 Zish string to a Python object use `zish.loads`. Eg.
@@ -172,7 +236,7 @@ Zish string to a Python object use `zish.loads`. Eg.
 ...     'number_of_novellas': 5,
 ...     'price': Decimal('7.99'),
 ...     'weight': 6.88,
-...     'key': bytearray(b'kshhgrl'),
+...     'key': b'kshhgrl',
 ...     'tags': ['russian', 'novel', '19th century']}
 >>>
 >>> # Output it as an Zish string
@@ -189,7 +253,7 @@ Zish string to a Python object use `zish.loads`. Eg.
     "novel",
     "19th century"],
   "title": "A Hero of Our Time",
-  "weight": 6.88,
+  "weight": 6.88e0,
   "would_recommend": true}
 >>>
 >>> # Load the Zish string, to give us back the Python object
@@ -202,31 +266,36 @@ A Hero of Our Time
 ....
 
 
-== Release Notes
+=== Release Notes
 
 
-=== Version 0.0.3 (2017-08-09)
+==== Version 0.0.4 (2017-08-15)
+
+* Simplify integer types.
+
+
+==== Version 0.0.3 (2017-08-09)
 
 * Fixed bug where interpreter couldn't find the `zish.antlr` package in eggs.
 * Removed a few superfluous escape sequences.
 
 
-=== Version 0.0.2 (2017-08-05)
+==== Version 0.0.2 (2017-08-05)
 
 * Now uses RFC3339 for timestamps.
 
 
-=== Version 0.0.1 (2017-08-03)
+==== Version 0.0.1 (2017-08-03)
 
 * Fix bug where an EOF could cause an infinite loop.
 
 
-=== Version 0.0.0 (2017-08-01)
+==== Version 0.0.0 (2017-08-01)
 
 * First public release. Passes all the tests.
 
 
-== Contributing
+=== Contributing
 
 Useful links:
 
@@ -247,12 +316,12 @@ download the ANTLR jar and then run the following command:
  java -jar antlr-4.7-complete.jar -Dlanguage=Python3 Zish.g4
 
 
-=== Making A New Release
+==== Making A New Release
 
 Run `tox` to make sure all tests pass, then update the `Release Notes` section
 then do:
 
 ....
 git tag -a x.y.z -m "version x.y.z"
-python setup.py register sdist bdist_wheel upload --sign
+python setup.py sdist bdist_wheel upload --sign
 ....
