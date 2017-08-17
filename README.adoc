@@ -5,7 +5,7 @@ A data serialization format, designed to be an improvement on JSON. It adds
 timestamp, decimal and binary types, as well as multi-line strings.
 
 * File extension `.zish`
-* MIME type `application/zish` (suggested, not official or anything)
+* MIME type `application/x.zish`
 
 
 == Zish Format
@@ -106,6 +106,13 @@ There are other escapes allowed in strings. Here's the full list:
 |===
 
 
+=== Bytes
+
+Binary data is delimited by the single-quote character, and represented by a
+base64 encoding as specified by
+https://tools.ietf.org/html/rfc3548.html[RFC3548]. Eg. `'a3NoaGdybA=='`.
+
+
 === Integer
 
 Integers can't begin with a `+`, and integers with more than one digit can't
@@ -154,7 +161,15 @@ Zish type, and the key part of a pair can be any Zish type except a map. An
 example of a map is: `{"hello": 90, true: "larch", 5: [null]}`.
 
 
-== Motivation
+=== Set
+
+A https://en.wikipedia.org/wiki/Set_(abstract_data_type)[set] is an unordered
+collection of values, with no duplicates. Sets start with a `(` and end with a
+`)`. The values are separated by a `,`. A value can be of any Zish type. An
+example of a set is: `(-7, "Ahoy!", null)`.
+
+
+== Why Zish?
 
 https://en.wikipedia.org/wiki/JSON[JSON] is wildly popular, but it lacks some
 primitive data types:
@@ -164,36 +179,37 @@ primitive data types:
   number)
 * Binary (a string of bytes) 
 
-Zish has these types, in addition to the JSON types.
+Zish has these types, in addition to the JSON types. It's also possible to have
+multi-line strings in Zish, which JSON doesn't allow.
 
-=== Why not just use Amazon Ion?
+To see where Zish falls in the space of data serialization formats, here's a
+comparison with the text representation of Amazon Ion and also the edn data
+format.
 
-Zish is heavily influenced by https://amzn.github.io/ion-docs/index.html[Amazon
-Ion], but Ion has the following shortcomings as a replacement for JSON:
+
+=== Comparison with Amazon Ion
+
+Zish is influenced by the text representation of
+https://amzn.github.io/ion-docs/index.html[Amazon Ion], but there are several
+differences between them:
 
 * Ion doesn't have a map type, instead it has a struct type which allows
   duplicate keys.
 * Ion has data types such as '`symbol`', s-expressions, and '`keyword`' which
-  aren't commonly needed.
-* There are three text types in Ion, which may be confusing.
-* There are two binary data types.
-
-That's not to say isn't an excellent format, this is just evaluating it as an
-improvement on JSON.
+  Zish doesn't have.
+* There are three text types in Ion, but Zish just has one.
+* There are two binary data types in Ion, but Zish just has one.
+* Ion has a binary as well as text representation.
 
 
-=== Why not just use the edn format?
+=== Comparison with the edn format
 
-Like Amazon Ion, https://github.com/edn-format/edn[edn] has more features than
-is necessary for an improved JSON. In particular:
+Zish is close in spirit to https://github.com/edn-format/edn[edn] but again
+there are differences:
 
-* It's extensible, ie. it has a mechanism for user defined types.
-* Edn has types such as '`character`', '`symbol`', '`vector`' which may not be
-  needed.
-* The timestamp type isn't a first-class type, it's added in as an extension.
-
-Again, this isn't to be derogatory about edn, it's just evaluating it as a
-replacement to JSON.
+* Edn is extensible, ie. it has a mechanism for user defined types.
+* Edn has types such as '`character`', '`symbol`' and '`vector`' which Zish
+  doesn't have.
 
 
 == Python Implementation
