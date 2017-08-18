@@ -281,8 +281,44 @@ A Hero of Our Time
 
 ....
 
+.Python to Zish type mapping
+|===
+| Python Type | Zish Type
+
+| bool
+| bool
+
+| int
+| integer
+
+| str
+| string
+
+| datetime.datetime
+| timestamp
+
+| dict
+| map
+
+| decimal.Decimal
+| decimal
+
+| float
+| float
+
+| bytearray, bytes
+| bytes
+
+| list, tuple
+| list
+|===
+
 
 === Release Notes
+
+==== Version 0.0.5 (2017-08-18)
+
+* Fix bug where `dumps` fails for a `tuple`.
 
 
 ==== Version 0.0.4 (2017-08-15)

@@ -191,7 +191,7 @@ def _dump(obj, indent):
         return '{' + ','.join(items) + '}'
     elif isinstance(obj, bool):
         return 'true' if obj else 'false'
-    elif isinstance(obj, list):
+    elif isinstance(obj, (list, tuple)):
         new_indent = indent + '  '
         b = ','.join('\n' + new_indent + _dump(v, new_indent) for v in obj)
         return '[' + b + ']'

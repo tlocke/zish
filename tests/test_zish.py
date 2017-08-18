@@ -5,7 +5,6 @@ from datetime import (
 import pytest
 from decimal import Decimal
 from base64 import b64decode
-from collections import OrderedDict
 
 
 def test_load():
@@ -400,20 +399,21 @@ def test_loads(zish_str, pyth):
         assert loads(zish_str) == pyth
 
 
-def test_dumps():
-    book = OrderedDict(
+@pytest.mark.parametrize(
+    "pyth,zish_str", [
         (
-            ('title', 'A Hero of Our Time'),
-            ('read_date', Datetime(2017, 7, 16, 14, 5, tzinfo=Timezone.utc)),
-            ('would_recommend', True),
-            ('description', None),
-            ('number_of_novellas', 5),
-            ('price', Decimal('7.99')),
-            ('weight', 6.88),
-            ('key', bytearray(b'kshhgrl')),
-            ('tags', ['russian', 'novel', '19th centuary'])))
+            {
+                'title': 'A Hero of Our Time',
+                'read_date': Datetime(2017, 7, 16, 14, 5, tzinfo=Timezone.utc),
+                'would_recommend': True,
+                'description': None,
+                'number_of_novellas': 5,
+                'price': Decimal('7.99'),
+                'weight': 6.88,
+                'key': b'kshhgrl',
+                'tags': ['russian', 'novel', '19th centuary']},
 
-    zish_str = """{
+            """{
   "description": null,
   "key": 'a3NoaGdybA==',
   "number_of_novellas": 5,
@@ -425,9 +425,11 @@ def test_dumps():
     "19th centuary"],
   "title": "A Hero of Our Time",
   "weight": 6.88e0,
-  "would_recommend": true}"""
+  "would_recommend": true}"""),
 
-    assert dumps(book) == zish_str
+        ((), '[]')])
+def test_dumps(pyth, zish_str):
+    assert dumps(pyth) == zish_str
 
 
 '''
