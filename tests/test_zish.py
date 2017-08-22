@@ -102,6 +102,12 @@ def test_dump():
             '2007-02-23T00:00:00-00:00',
             Datetime(2007, 2, 23, tzinfo=Timezone.utc)),
 
+        # The same instant, with Z timezone offset
+        (
+            '2007-02-23T00:00:00Z',
+            Datetime(2007, 2, 23, tzinfo=Timezone.utc)),
+
+
         # Not a timestamp, but an int
         (
             '2007',
@@ -427,7 +433,9 @@ def test_loads(zish_str, pyth):
   "weight": 6.88e0,
   "would_recommend": true}"""),
 
-        ((), '[]')])
+        ((), '[]'),
+
+        (Datetime(2017, 7, 16, 14, 5), '2017-07-16T14:05:00-00:00')])
 def test_dumps(pyth, zish_str):
     assert dumps(pyth) == zish_str
 
@@ -435,12 +443,6 @@ def test_dumps(pyth, zish_str):
 '''
 def test_str():
     pstr = """"""
-
     conv = loads(pstr)
-    assert conv == {'first': "a", 'last': "b"}
-    for c in pstr:
-        print(ord(c))
-    for c in conv:
-        print(ord(c))
     raise Exception()
 '''

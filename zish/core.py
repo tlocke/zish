@@ -12,7 +12,6 @@ from datetime import datetime as Datetime, timezone as Timezone
 
 QUOTE = '"'
 UTC_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
-TZ_FORMAT = '%Y-%m-%dT%H:%M:%S%z'
 
 
 class ZishException(Exception):
@@ -212,10 +211,12 @@ def _dump(obj, indent):
     elif isinstance(obj, (bytes, bytearray)):
         return "'" + b64encode(obj).decode() + "'"
     elif isinstance(obj, Datetime):
-        if obj.tzinfo is None or obj.tzinfo == Timezone.utc:
-            fmt = UTC_FORMAT
+        tzinfo = obj.tzinfo
+        if tzinfo == Timezone.utc:
+            return obj.strftime(UTC_FORMAT)
+        elif tzinfo is None:
+            return obj.isoformat() + '-00:00'
         else:
-            fmt = TZ_FORMAT
-        return obj.strftime(fmt)
+            return obj.isoformat()
     else:
         raise ZishException("Type " + str(type(obj)) + " not recognised.")
