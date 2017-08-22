@@ -328,6 +328,12 @@ A Hero of Our Time
 
 === Release Notes
 
+
+==== Version 0.0.7 (2017-08-22)
+
+* Fix bug with UTC timestamp formatting.
+
+
 ==== Version 0.0.6 (2017-08-22)
 
 * Fix bug in timestamp formatting.
