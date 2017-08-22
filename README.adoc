@@ -328,6 +328,12 @@ A Hero of Our Time
 
 === Release Notes
 
+==== Version 0.0.6 (2017-08-22)
+
+* Fix bug in timestamp formatting.
+* Add note about comments.
+
+
 ==== Version 0.0.5 (2017-08-18)
 
 * Fix bug where `dumps` fails for a `tuple`.
