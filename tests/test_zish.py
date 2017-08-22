@@ -5,6 +5,7 @@ from datetime import (
 import pytest
 from decimal import Decimal
 from base64 import b64decode
+import pytz
 
 
 def test_load():
@@ -435,7 +436,11 @@ def test_loads(zish_str, pyth):
 
         ((), '[]'),
 
-        (Datetime(2017, 7, 16, 14, 5), '2017-07-16T14:05:00-00:00')])
+        (Datetime(2017, 7, 16, 14, 5), '2017-07-16T14:05:00-00:00'),
+
+        (
+            Datetime(2017, 7, 16, 14, 5, tzinfo=pytz.utc),
+            '2017-07-16T14:05:00Z')])
 def test_dumps(pyth, zish_str):
     assert dumps(pyth) == zish_str
 

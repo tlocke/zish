@@ -212,10 +212,10 @@ def _dump(obj, indent):
         return "'" + b64encode(obj).decode() + "'"
     elif isinstance(obj, Datetime):
         tzinfo = obj.tzinfo
-        if tzinfo == Timezone.utc:
-            return obj.strftime(UTC_FORMAT)
-        elif tzinfo is None:
+        if tzinfo is None:
             return obj.isoformat() + '-00:00'
+        elif tzinfo.utcoffset(obj) == Timezone.utc.utcoffset(obj):
+            return obj.strftime(UTC_FORMAT)
         else:
             return obj.isoformat()
     else:
