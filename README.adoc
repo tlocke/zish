@@ -157,8 +157,9 @@ A https://en.wikipedia.org/wiki/Associative_array[map] is an unordered
 collection of key / value pairs. Duplicate keys aren't allowed. Maps start
 with a `{` and end with a `}`. The pairs are separated by a `,` and the key
 is separated from the value with a `:`. The value part of a pair can be any
-Zish type, and the key part of a pair can be any Zish type except a map. An
-example of a map is: `{"hello": 90, true: "larch", 5: [null]}`.
+Zish type, and the key part of a pair can be any Zish type except the container
+types (map, list and set). An example of a map is:
+`{"hello": 90, true: "larch", 5: [null]}`.
 
 
 === Set

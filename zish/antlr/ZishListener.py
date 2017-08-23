@@ -71,12 +71,3 @@ class ZishListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ZishParser#ws.
-    def enterWs(self, ctx:ZishParser.WsContext):
-        pass
-
-    # Exit a parse tree produced by ZishParser#ws.
-    def exitWs(self, ctx:ZishParser.WsContext):
-        pass
-
-
