@@ -83,8 +83,8 @@ def parse(node):
                 ZishParser.ElementContext)):
 
         for c in node.getChildren():
-            if isinstance(c, TerminalNodeImpl) and c.getPayload().type in (
-                    ZishParser.EOF, ZishParser.WS):
+            if isinstance(c, TerminalNodeImpl) and \
+                    c.getPayload().type == ZishParser.EOF:
                 continue
             return parse(c)
 

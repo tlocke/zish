@@ -5,7 +5,7 @@ grammar Zish;
 // note that EOF is a concept for the grammar, technically Zish streams
 // are infinite
 start
-    : WS* element (WS+ element)* WS* EOF
+    : element (WS+ element)* EOF
     ;
 
 element
@@ -16,8 +16,8 @@ element
     ;
 
 list_type
-    : LIST_START WS* element (WS* COMMA WS* element)* WS* LIST_FINISH
-    | LIST_START WS* LIST_FINISH
+    : LIST_START element (COMMA element)* LIST_FINISH
+    | LIST_START LIST_FINISH
     ;
 
 LIST_START
@@ -29,8 +29,8 @@ LIST_FINISH
     ;
 
 set_type
-    : SET_START WS* key (WS* COMMA WS* key)* WS* SET_FINISH
-    | SET_START WS* SET_FINISH
+    : SET_START key (COMMA key)* SET_FINISH
+    | SET_START SET_FINISH
     ;
 
 SET_START
@@ -46,8 +46,8 @@ COMMA
     ;
 
 map_type
-    : MAP_START WS* pair (WS* COMMA WS* pair)* WS* MAP_FINISH
-    | MAP_START WS* MAP_FINISH
+    : MAP_START pair (COMMA pair)* MAP_FINISH
+    | MAP_START MAP_FINISH
     ;
 
 MAP_START
@@ -59,7 +59,7 @@ MAP_FINISH
     ;
 
 pair
-    : key WS* COLON WS* element
+    : key COLON element
     ;
 
 COLON
@@ -78,10 +78,7 @@ key
     ;
 
 WS
-    : SPACE+
-    | INLINE_COMMENT
-    | BLOCK_COMMENT
-    ;
+    : ( SPACE+ | INLINE_COMMENT | BLOCK_COMMENT ) -> skip;
 
 fragment
 INLINE_COMMENT
@@ -147,23 +144,28 @@ SECOND
     : [0-5] DIGIT ('.' DIGIT+)?
     ;
 
-INTEGER
-    : '-'? ( '0' | [1-9] DIGIT*)
-    ;
-
 FLOAT
-    : INTEGER FRAC? FLOAT_EXP
+    : INT FRAC? FLOAT_EXP
     | PLUS_OR_MINUS 'inf'
     | 'nan'
+    ;
+
+DECIMAL
+    : INT FRAC? DECIMAL_EXP?
+    ;
+
+INTEGER
+    : INT
+    ;
+
+fragment
+INT
+    : '-'? ( '0' | [1-9] DIGIT*)
     ;
 
 fragment
 FLOAT_EXP
     : 'e' PLUS_OR_MINUS? DIGIT+
-    ;
-
-DECIMAL
-    : INTEGER FRAC? DECIMAL_EXP?
     ;
 
 fragment
