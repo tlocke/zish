@@ -330,6 +330,12 @@ A Hero of Our Time
 === Release Notes
 
 
+==== Version 0.0.9 (2017-08-24)
+
+* Fix bug where `int` was being parsed as `Decimal`.
+* Make bytes type return a `bytes` rather than a `bytearray`.
+
+
 ==== Version 0.0.8 (2017-08-24)
 
 * Container types aren't allowed as map keys.
