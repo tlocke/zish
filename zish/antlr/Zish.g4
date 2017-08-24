@@ -144,18 +144,18 @@ SECOND
     : [0-5] DIGIT ('.' DIGIT+)?
     ;
 
-FLOAT
-    : INT FRAC? FLOAT_EXP
-    | PLUS_OR_MINUS 'inf'
-    | 'nan'
+INTEGER
+    : INT
     ;
 
 DECIMAL
     : INT FRAC? DECIMAL_EXP?
     ;
 
-INTEGER
-    : INT
+FLOAT
+    : INT FRAC? FLOAT_EXP
+    | PLUS_OR_MINUS 'inf'
+    | 'nan'
     ;
 
 fragment

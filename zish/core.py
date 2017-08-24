@@ -119,7 +119,7 @@ def parse(node):
             return unescape(token.text[1:-1])
 
         elif token_type == ZishParser.BLOB:
-            return bytearray(b64decode(token.text))
+            return b64decode(token.text)
 
         else:
             raise ZishException(

@@ -54,8 +54,8 @@ class ZishParser ( Parser ):
 
     symbolicNames = [ "<INVALID>", "LIST_START", "LIST_FINISH", "SET_START", 
                       "SET_FINISH", "COMMA", "MAP_START", "MAP_FINISH", 
-                      "COLON", "WS", "NULL", "BOOL", "TIMESTAMP", "FLOAT", 
-                      "DECIMAL", "INTEGER", "STRING", "BLOB" ]
+                      "COLON", "WS", "NULL", "BOOL", "TIMESTAMP", "INTEGER", 
+                      "DECIMAL", "FLOAT", "STRING", "BLOB" ]
 
     RULE_start = 0
     RULE_element = 1
@@ -81,9 +81,9 @@ class ZishParser ( Parser ):
     NULL=10
     BOOL=11
     TIMESTAMP=12
-    FLOAT=13
+    INTEGER=13
     DECIMAL=14
-    INTEGER=15
+    FLOAT=15
     STRING=16
     BLOB=17
 
@@ -216,7 +216,7 @@ class ZishParser ( Parser ):
             self.state = 32
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [ZishParser.NULL, ZishParser.BOOL, ZishParser.TIMESTAMP, ZishParser.FLOAT, ZishParser.DECIMAL, ZishParser.INTEGER, ZishParser.STRING, ZishParser.BLOB]:
+            if token in [ZishParser.NULL, ZishParser.BOOL, ZishParser.TIMESTAMP, ZishParser.INTEGER, ZishParser.DECIMAL, ZishParser.FLOAT, ZishParser.STRING, ZishParser.BLOB]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 28
                 self.key()
@@ -612,7 +612,7 @@ class ZishParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 83
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ZishParser.NULL) | (1 << ZishParser.BOOL) | (1 << ZishParser.TIMESTAMP) | (1 << ZishParser.FLOAT) | (1 << ZishParser.DECIMAL) | (1 << ZishParser.INTEGER) | (1 << ZishParser.STRING) | (1 << ZishParser.BLOB))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ZishParser.NULL) | (1 << ZishParser.BOOL) | (1 << ZishParser.TIMESTAMP) | (1 << ZishParser.INTEGER) | (1 << ZishParser.DECIMAL) | (1 << ZishParser.FLOAT) | (1 << ZishParser.STRING) | (1 << ZishParser.BLOB))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
