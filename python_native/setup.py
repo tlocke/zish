@@ -15,5 +15,4 @@ setup(
     packages=[
         'zish', 'zish.antlr'],
     install_requires=[
-        'antlr4-python3-runtime==4.7',
         'arrow==0.10.0'])
