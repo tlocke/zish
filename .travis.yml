@@ -7,4 +7,6 @@ python:
 install:
   - pip install tox
 
-script: tox
+script:
+  - tox -c python_antlr/tox.ini
+  - tox -c python_native/tox.ini
