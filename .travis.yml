@@ -7,4 +7,6 @@ python:
 install:
   - pip install tox
 
-script: tox
+script:
+  - cd python_antlr; tox
+  - cd python_native; tox
