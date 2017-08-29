@@ -5,17 +5,19 @@ grammar Zish;
 // note that EOF is a concept for the grammar, technically Zish streams
 // are infinite
 start
-    : ws* element (ws+ element)* ws* EOF
+    : element EOF
     ;
 
 element
     : key
     | map_type
+    | list_type
+    | set_type
     ;
 
 list_type
-    : LIST_START ws* element (ws* COMMA ws* element)* ws* LIST_FINISH
-    | LIST_START ws* LIST_FINISH
+    : LIST_START element (COMMA element)* LIST_FINISH
+    | LIST_START LIST_FINISH
     ;
 
 LIST_START
@@ -27,8 +29,8 @@ LIST_FINISH
     ;
 
 set_type
-    : SET_START ws* key (ws* COMMA ws* key)* ws* SET_FINISH
-    | SET_START ws* SET_FINISH
+    : SET_START key (COMMA key)* SET_FINISH
+    | SET_START SET_FINISH
     ;
 
 SET_START
@@ -44,8 +46,8 @@ COMMA
     ;
 
 map_type
-    : MAP_START ws* pair (ws* COMMA ws* pair)* ws* MAP_FINISH
-    | MAP_START ws* MAP_FINISH
+    : MAP_START pair (COMMA pair)* MAP_FINISH
+    | MAP_START MAP_FINISH
     ;
 
 MAP_START
@@ -57,7 +59,7 @@ MAP_FINISH
     ;
 
 pair
-    : key ws* COLON ws* element
+    : key COLON element
     ;
 
 COLON
@@ -73,24 +75,17 @@ key
     | DECIMAL
     | STRING
     | BLOB
-    | list_type
-    | set_type
     ;
 
-ws
-    : WHITESPACE
-    | INLINE_COMMENT
-    | BLOCK_COMMENT
-    ;
+WS
+    : ( SPACE+ | INLINE_COMMENT | BLOCK_COMMENT ) -> skip;
 
-WHITESPACE
-    : WS+
-    ;
-
+fragment
 INLINE_COMMENT
     : '//' .*? (NL | EOF)
     ;
 
+fragment
 BLOCK_COMMENT
     : '/*' .*? '*/'
     ;
@@ -150,27 +145,27 @@ SECOND
     ;
 
 INTEGER
-    : '-'? UNSIGNED_INTEGER
+    : INT
     ;
 
-UNSIGNED_INTEGER
-    : '0'
-    | [1-9] DIGIT*
+DECIMAL
+    : INT FRAC? DECIMAL_EXP?
     ;
 
 FLOAT
-    : INTEGER FRAC? FLOAT_EXP
+    : INT FRAC? FLOAT_EXP
     | PLUS_OR_MINUS 'inf'
     | 'nan'
     ;
 
 fragment
-FLOAT_EXP
-    : 'e' PLUS_OR_MINUS? DIGIT+
+INT
+    : '-'? ( '0' | [1-9] DIGIT*)
     ;
 
-DECIMAL
-    : INTEGER FRAC? DECIMAL_EXP?
+fragment
+FLOAT_EXP
+    : 'e' PLUS_OR_MINUS? DIGIT+
     ;
 
 fragment
@@ -189,7 +184,7 @@ STRING_TEXT_ALLOWED
     ;
 
 BLOB
-    : '\'' (BASE_64_QUARTET | WS)* BASE_64_PAD? WS* '\''
+    : '\'' (BASE_64_QUARTET | SPACE)* BASE_64_PAD? SPACE* '\''
     ;
 
 fragment
@@ -200,17 +195,17 @@ BASE_64_PAD
 
 fragment
 BASE_64_QUARTET
-    : BASE_64_CHAR WS* BASE_64_CHAR WS* BASE_64_CHAR WS* BASE_64_CHAR
+    : BASE_64_CHAR SPACE* BASE_64_CHAR SPACE* BASE_64_CHAR SPACE* BASE_64_CHAR
     ;
 
 fragment
 BASE_64_PAD1
-    : BASE_64_CHAR WS* BASE_64_CHAR WS* BASE_64_CHAR WS* '='
+    : BASE_64_CHAR SPACE* BASE_64_CHAR SPACE* BASE_64_CHAR SPACE* '='
     ;
 
 fragment
 BASE_64_PAD2
-    : BASE_64_CHAR WS* BASE_64_CHAR WS* '=' WS* '='
+    : BASE_64_CHAR SPACE* BASE_64_CHAR SPACE* '=' SPACE* '='
     ;
 
 fragment
@@ -220,8 +215,7 @@ BASE_64_CHAR
 
 fragment
 FRAC
-    : '.'
-    | '.' DIGIT (UNDERSCORE? DIGIT)*
+    : '.' DIGIT*
     ;
 
 fragment
@@ -272,10 +266,13 @@ HEX_DIGIT
     ;
 
 fragment
-WS
-    : WS_NOT_NL
+SPACE
+    : '\u0009' // tab
     | '\u000A' // line feed
+    | '\u000B' // vertical tab
+    | '\u000C' // form feed
     | '\u000D' // carriage return
+    | '\u0020' // space
     ;
 
 fragment
@@ -283,17 +280,4 @@ NL
     : '\u000D\u000A'  // carriage return + line feed
     | '\u000D'        // carriage return
     | '\u000A'        // line feed
-    ;
-
-fragment
-WS_NOT_NL
-    : '\u0009' // tab
-    | '\u000B' // vertical tab
-    | '\u000C' // form feed
-    | '\u0020' // space
-    ;
-
-fragment
-UNDERSCORE
-    : '_'
     ;

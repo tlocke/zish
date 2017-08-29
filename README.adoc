@@ -32,7 +32,7 @@ Here's an example of Zish:
 ```
 
 Zish is a valid stream of Unicode code points encoded in UTF-8. The
-https://github.com/tlocke/zish/blob/master/zish/antlr/Zish.g4[formal
+https://github.com/tlocke/zish/blob/master/zish/Zish.g4[formal
 specification of Zish] is an http://www.antlr.org/[ANTLR] grammar. Zish has the
 following data types:
 
@@ -227,5 +227,5 @@ there are differences:
 
 == Implementations
 
-* link:python_native/README.adoc[Python (native)]
-* link:python_antlr/README.adoc[Python (using antlr)]
+* https://github.com/tlocke/zish_python[Python (native)]
+* https://github.com/tlocke/zish_python_antlr[Python (using antlr)]
