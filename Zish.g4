@@ -11,8 +11,6 @@ start
 element
     : key
     | map_type
-    | list_type
-    | set_type
     ;
 
 list_type
@@ -75,6 +73,8 @@ key
     | DECIMAL
     | STRING
     | BLOB
+    | set_type
+    | list_type
     ;
 
 WS
