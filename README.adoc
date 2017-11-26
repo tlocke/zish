@@ -173,7 +173,7 @@ example of a set is: `(-7, "Ahoy!", null)`.
 
 === Comments
 
-Inline comments start with `//` and block comments begin with `/*` and end with
+Inline comments start with `//` and block comments begin with `/\*` and end with
 `*/`. Comments are treated as whitespace rather than values, so they're
 ignored by the parser and not passed through to the application. In XML,
 comments are passed through to the application, which is thought to lead to an
