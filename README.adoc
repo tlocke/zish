@@ -183,14 +183,25 @@ example of a set is: `(-7, "Ahoy!", null)`.
 
 === Comments
 
-Inline comments start with `//` and block comments begin with `/\*` and end with
-`*/`. Comments are treated as whitespace rather than values, so they're
-ignored by the parser and not passed through to the application. In XML,
-comments are passed through to the application, which is thought to lead to an
-abuse of comments because it's unclear whether they're part of the content or
-not. JSON https://plus.google.com/+DouglasCrockfordEsq/posts/RK8qyGVaGSr[avoids
-this problem] by not allowing comments. Zish steers a middle path here by
-allowing comments, but ignoring them at the parsing stage.
+Inline comments start with `//` and continue until the end of the line. Line
+endings are:
+
+* U+000A (Line Feed)
+* U+000D (Carriage Return)
+* U+000A followed by U+000D
+* EOF (End Of File)
+
+Block comments begin with `/\*` and end with `*/`.
+
+Comments are treated as whitespace rather than values, so they're
+ignored by the parser and not passed through to the application.
+
+In XML, comments are passed through to the application, which is thought to lead
+to an abuse of comments because it's unclear whether they're part of the content
+or not. JSON
+https://plus.google.com/+DouglasCrockfordEsq/posts/RK8qyGVaGSr[avoids this
+ problem] by not allowing comments. Zish steers a middle path here by allowing
+comments, but ignoring them at the parsing stage.
 
 
 == Why Zish?
