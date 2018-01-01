@@ -124,6 +124,16 @@ begin with a zero. Examples of valid integers are: +
 * `-589`
 
 
+=== Boolean
+
+The boolean data type can only have values `true` or `false`.
+
+
+=== Null
+
+The null type can only have the value `null`.
+
+
 === Decimal
 
 A https://en.wikipedia.org/wiki/Decimal_data_type[decimal] is a lossless
