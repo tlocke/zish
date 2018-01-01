@@ -32,7 +32,7 @@ Here's an example of Zish:
 ```
 
 Zish is a valid stream of Unicode code points encoded in UTF-8. The
-https://github.com/tlocke/zish/blob/master/zish/Zish.g4[formal
+https://github.com/tlocke/zish/blob/master/Zish.g4[formal
 specification of Zish] is an http://www.antlr.org/[ANTLR] grammar. Zish has the
 following data types:
 
