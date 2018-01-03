@@ -13,7 +13,9 @@ timestamp, decimal and binary types, as well as multi-line strings.
 Here's an example of Zish:
 
 ```
-// This is a comment
+// This is an inline comment
+
+/* This is a block comment */
 
 // Curly brackets delimit a map
 {
@@ -183,13 +185,10 @@ example of a set is: `(-7, "Ahoy!", null)`.
 
 === Comments
 
-Inline comments start with `//` and continue until the end of the line. Line
-endings are:
-
-* U+000A (Line Feed)
-* U+000D (Carriage Return)
-* U+000A followed by U+000D
-* EOF (End Of File)
+Inline comments start with `//` and continue until the end of the line or the
+end of the file. EOL characters are
+https://en.wikipedia.org/wiki/Newline#Unicode[defined in Unicode] and include
+LF, CR+LF and CR.
 
 Block comments begin with `/\*` and end with `*/`.
 
@@ -212,10 +211,28 @@ primitive data types:
 * Timestamp
 * Decimal (exact https://en.wikipedia.org/wiki/Decimal_data_type[decimal]
   number)
-* Binary (a string of bytes) 
+* Bytes (a sequence of bytes)
 
-Zish has these types, in addition to the JSON types. It's also possible to have
-multi-line strings in Zish, which JSON doesn't allow.
+Zish has these types, in addition to the JSON types.
+
+https://en.wikipedia.org/wiki/Newline[End of line] (EOL) character sequences
+seem to be the source of problems in data serialization formats. One problem is
+that different operating systems have different conventions for what
+combination of characters constitutes an EOL. Unix based systems use LF, but
+Windows uses CR+LF. So if, for example, a file is created on a Debian machine
+and then opened on a Windows machine, all the text runs together without any
+line breaks.
+
+JSON gets round this by saying that within strings, literal line breaks aren't
+allowed, and you have to use an escaped line break `\n` instead.
+
+Zish takes the view that Unicode has solved the EOL problem. Since Zish is a
+sequence of Unicode characters, it follows that Zish should respect the
+https://en.wikipedia.org/wiki/Newline#Unicode[Unicode definition of
+EOLs] (ie. LF, CR, CR+LF and others). So regardless of the operating system,
+Zish is first and foremost a Unicode sequence.
+
+This allows multi-line strings to be written more clearly in Zish.
 
 To see where Zish falls in the space of data serialization formats, here's a
 comparison with the text representation of Amazon Ion and also the edn data
