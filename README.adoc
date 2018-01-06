@@ -2,7 +2,7 @@
 :toc: preamble
 
 A data serialization format, designed to be an improvement on JSON. It adds
-timestamp, decimal and binary types, as well as multi-line strings.
+timestamp, bytes and decimal types, as well as multi-line strings.
 
 * File extension `.zish`
 * MIME type `application/x.zish`
@@ -23,13 +23,12 @@ Here's an example of Zish:
   "description": null,
   "key": 'a3NoaGdybA==',  // Single quotes delimit base64 encoded binary
   "number_of_novellas": 5,
-  "price": 7.99,  // A decimal (lossless) number
+  "price": 7.99,  // A decimal number
   "read_date": 2017-07-16T14:05:00Z,
   "tags": [  // Square brackets delimit a list
     "russian",
     "novel",
     "19th century"],
-  "weight": 6.88e0,  // A float (lossy) number
   "would_recommend": true}
 ```
 
@@ -138,20 +137,12 @@ The null type can only have the value `null`.
 
 === Decimal
 
-A https://en.wikipedia.org/wiki/Decimal_data_type[decimal] is a lossless
-representation of a real number. The exponent starts with a `d`. Examples are:
+A https://en.wikipedia.org/wiki/Decimal_data_type[decimal] is a
+representation of a real number in base 10. The exponent starts with a `e`.
+Examples are:
 
 * `0.993`
-* `1.78d-1`
-
-
-=== Float
-
-A lossy representation of a real number. The exponent starts with an `e`. It
-can have the special values `+inf`, `-inf` and `nan`. Examples are:
-
-* `-0.7e4`
-* `3.141e0`
+* `1.78e-1`
 
 
 === List
@@ -196,17 +187,22 @@ https://plus.google.com/+DouglasCrockfordEsq/posts/RK8qyGVaGSr[avoids this
 comments, but ignoring them at the parsing stage.
 
 
-== Why Zish?
+== Comparison with JSON
 
-https://en.wikipedia.org/wiki/JSON[JSON] is wildly popular, but it lacks some
-primitive data types:
+To represent real numbers, https://en.wikipedia.org/wiki/JSON[JSON] uses binary
+floating point numbers, but Zish uses
+https://en.wikipedia.org/wiki/Decimal_data_type[decimal floating point]
+numbers. Zish also has the following data types that JSON doesn't have:
 
 * Timestamp
-* Decimal (exact https://en.wikipedia.org/wiki/Decimal_data_type[decimal]
-  number)
 * Bytes (a sequence of bytes)
 
-Zish has these types, in addition to the JSON types.
+JSON has an 'object' type whereas Zish has a 'map' type. They both represent
+an unordered collection of name / value pairs, but they have two differences:
+
+* In JSON the 'name' part of the name / value pair can only be a string, but in
+  Zish the 'name' part can be any Zish value.
+* In Zish, duplicate names aren't allowed, but in JSON they are.
 
 https://en.wikipedia.org/wiki/Newline[End of line] (EOL) character sequences
 seem to be the source of problems in data serialization formats. One problem is
@@ -226,10 +222,6 @@ EOLs] (ie. LF, CR, CR+LF and others). So regardless of the operating system,
 Zish is first and foremost a Unicode sequence.
 
 This allows multi-line strings to be written more clearly in Zish.
-
-To see where Zish falls in the space of data serialization formats, here's a
-comparison with the text representation of Amazon Ion and also the edn data
-format.
 
 
 === Comparison with Amazon Ion

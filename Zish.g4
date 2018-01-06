@@ -11,7 +11,6 @@ element
     | NULL
     | TIMESTAMP
     | INTEGER
-    | FLOAT
     | DECIMAL
     | STRING
     | BLOB
@@ -129,13 +128,7 @@ INTEGER
     ;
 
 DECIMAL
-    : INT FRAC? DECIMAL_EXP?
-    ;
-
-FLOAT
-    : INT FRAC? FLOAT_EXP
-    | PLUS_OR_MINUS 'inf'
-    | 'nan'
+    : INT FRAC? EXP?
     ;
 
 fragment
@@ -144,13 +137,8 @@ INT
     ;
 
 fragment
-FLOAT_EXP
+EXP
     : 'e' PLUS_OR_MINUS? DIGIT+
-    ;
-
-fragment
-DECIMAL_EXP
-    : 'd' PLUS_OR_MINUS? DIGIT+
     ;
 
 STRING
