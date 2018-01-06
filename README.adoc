@@ -166,10 +166,12 @@ including a list or map.
 === Map
 
 A https://en.wikipedia.org/wiki/Associative_array[map] is an unordered
-collection of key / value pairs. Duplicate keys aren't allowed. Maps start
-with a `{` and end with a `}`. The pairs are separated by a `,` and the key
-is separated from the value with a `:`. Keys and values can be of any Zish
-type. An example of a map is:
+collection of key / value pairs. Duplicate keys aren't allowed (for keys that
+are strings, the test for uniqeness is done without any
+https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization[normalization]
+of the strings). Maps start with a `{` and end with a `}`. The pairs are
+separated by a `,` and the key is separated from the value with a `:`. Keys and
+values can be of any Zish type. An example of a map is:
 
 `{"hello": 90, true: "larch", 5: [null]}`.
 
