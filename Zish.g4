@@ -62,7 +62,7 @@ WS
 
 fragment
 INLINE_COMMENT
-    : '//' .*? (NL | EOF)
+    : '//' .*? (EOL | EOF)
     ;
 
 fragment
@@ -219,7 +219,7 @@ COMMON_ESCAPE_CODE
     | '"'
     | '/'
     | '\\'
-    | NL
+    | EOL
     ;
 
 fragment
@@ -250,8 +250,13 @@ SPACE
     ;
 
 fragment
-NL
-    : '\u000D\u000A'  // carriage return + line feed
-    | '\u000D'        // carriage return
-    | '\u000A'        // line feed
+EOL
+    : '\u000A' // LF: Line Feed
+    | '\u000B' // VT: Vertical Tab
+    | '\u000C' // FF: Form Feed
+    | '\u000D' // CR: Carriage Return
+    | '\u000D\u000A' // CR+LF: CR followed by LF
+    | '\u0085' // NEL: Next Line
+    | '\u2028' // LS: Line Separator
+    | '\u2029' // PS: Paragraph Separator
     ;
