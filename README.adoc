@@ -174,14 +174,6 @@ type. An example of a map is:
 `{"hello": 90, true: "larch", 5: [null]}`.
 
 
-=== Set
-
-A https://en.wikipedia.org/wiki/Set_(abstract_data_type)[set] is an unordered
-collection of values, with no duplicates. Sets start with a `(` and end with a
-`)`. The values are separated by a `,`. A value can be of any Zish type. An
-example of a set is: `(-7, "Ahoy!", null)`.
-
-
 === Comments
 
 Inline comments start with `//` and continue until the end of the line or the

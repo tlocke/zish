@@ -15,7 +15,6 @@ element
     | DECIMAL
     | STRING
     | BLOB
-    | set_type
     | list_type
     | map_type
     ;
@@ -31,19 +30,6 @@ LIST_START
 
 LIST_FINISH
     : ']'
-    ;
-
-set_type
-    : SET_START element (COMMA element)* SET_FINISH
-    | SET_START SET_FINISH
-    ;
-
-SET_START
-    : '('
-    ;
-
-SET_FINISH
-    : ')'
     ;
 
 COMMA
