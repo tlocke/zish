@@ -7,6 +7,12 @@ start
     ;
 
 element
+    : key
+    | list_type
+    | map_type
+    ;
+
+key
     : BOOL
     | NULL
     | TIMESTAMP
@@ -14,8 +20,6 @@ element
     | DECIMAL
     | STRING
     | BLOB
-    | list_type
-    | map_type
     ;
 
 list_type
@@ -49,7 +53,7 @@ MAP_FINISH
     ;
 
 pair
-    : element COLON element
+    : key COLON element
     ;
 
 COLON
