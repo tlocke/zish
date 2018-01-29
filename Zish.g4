@@ -10,11 +10,11 @@ element
     : key
     | list_type
     | map_type
+    | NULL
     ;
 
 key
     : BOOL
-    | NULL
     | TIMESTAMP
     | INTEGER
     | DECIMAL
