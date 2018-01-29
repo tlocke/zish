@@ -13,19 +13,18 @@ timestamp, bytes and decimal types, as well as multi-line strings.
 Here's an example of Zish:
 
 ```
-// This is an inline comment
 
-/* This is a block comment */
+/* This is a comment */
 
-// Curly brackets delimit a map
+/* Curly brackets delimit a map */
 {
-  "title": "A Hero of Our Time",  // A key / value pair of strings
+  "title": "A Hero of Our Time",  /* A key / value pair of strings */
   "description": null,
-  "key": 'a3NoaGdybA==',  // Single quotes delimit base64 encoded binary
+  "key": 'a3NoaGdybA==',  /* Single quotes delimit base64 encoded binary */
   "number_of_novellas": 5,
-  "price": 7.99,  // A decimal number
+  "price": 7.99,  /* A decimal number */
   "read_date": 2017-07-16T14:05:00Z,
-  "tags": [  // Square brackets delimit a list
+  "tags": [  /* Square brackets delimit a list */
     "russian",
     "novel",
     "19th century"],
@@ -138,11 +137,13 @@ The null type can only have the value `null`.
 === Decimal
 
 A https://en.wikipedia.org/wiki/Decimal_data_type[decimal] is a
-representation of a real number in base 10. The exponent starts with a `e`.
-Examples are:
+representation of a real number in base 10. The exponent starts with an `e` or
+`E`. Examples are:
 
 * `0.993`
 * `1.78e-1`
+
+Decimals can also have TODO: add in +/- inf and Nan etc.
 
 
 === List
@@ -170,12 +171,7 @@ example of a map is:
 
 === Comments
 
-Inline comments start with `//` and continue until the end of the line or the
-end of the file. EOL characters are
-https://en.wikipedia.org/wiki/Newline#Unicode[defined in Unicode] and include
-LF, CR+LF and CR.
-
-Block comments begin with `/\*` and end with `*/`.
+Comments begin with `/\*` and end with `*/`.
 
 Comments are treated as whitespace rather than values, so they're
 ignored by the parser and not passed through to the application.

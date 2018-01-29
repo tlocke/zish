@@ -61,12 +61,7 @@ COLON
     ;
 
 WS
-    : ( SPACE+ | INLINE_COMMENT | BLOCK_COMMENT ) -> skip;
-
-fragment
-INLINE_COMMENT
-    : '//' .*? (EOL | EOF)
-    ;
+    : ( SPACE+ | BLOCK_COMMENT ) -> skip;
 
 fragment
 BLOCK_COMMENT
@@ -142,7 +137,7 @@ INT
 
 fragment
 EXP
-    : 'e' PLUS_OR_MINUS? DIGIT+
+    : [eE] PLUS_OR_MINUS? DIGIT+
     ;
 
 STRING
