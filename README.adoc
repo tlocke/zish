@@ -252,3 +252,7 @@ there are differences:
 
 * https://github.com/tlocke/zish_python[Python (native)]
 * https://github.com/tlocke/zish_python_antlr[Python (using antlr)]
+
+If you're working on an implementation of Zish, raise an issue on GitHub and
+we'll add a link. It doesn't need to be a complete implementation, a
+work-in-progress is fine.
