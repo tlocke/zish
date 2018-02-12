@@ -127,7 +127,9 @@ INTEGER
     ;
 
 DECIMAL
-    : INT FRAC? EXP?
+    : INT FRAC? EXP? 
+    | 'NaN'
+    | PLUS_OR_MINUS? 'Infinity'
     ;
 
 fragment

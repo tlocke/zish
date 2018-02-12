@@ -143,7 +143,9 @@ representation of a real number in base 10. The exponent starts with an `e` or
 * `0.993`
 * `1.78e-1`
 
-Decimals can also have TODO: add in +/- inf and Nan etc.
+Decimals can also have the special values
+https://en.wikipedia.org/wiki/NaN[`NaN`] and `Infinity` (optionally prefixed
+with `+` or `-`).
 
 
 === List
