@@ -12,7 +12,7 @@ timestamp, bytes and decimal types, as well as multi-line strings.
 
 Here's an example of Zish:
 
-```
+----
 
 /* This is a comment */
 
@@ -27,9 +27,11 @@ Here's an example of Zish:
   "tags": [  /* Square brackets delimit a list */
     "russian",
     "novel",
-    "19th century"],
-  "would_recommend": true}
-```
+    "19th century",
+  ],
+  "would_recommend": true,
+}
+----
 
 Zish is a valid stream of Unicode code points encoded in UTF-8. The
 https://github.com/tlocke/zish/blob/master/Zish.g4[formal
@@ -153,7 +155,18 @@ with `+` or `-`).
 A https://en.wikipedia.org/wiki/List_(abstract_data_type)[list] is an ordered
 sequence of values, where the same value may occur more than once. Lists
 begin with a `[` and end with a `]` and the values are separated by `,`. An
-example is: `[56, "pod", 0]`. An element of a list can be any Zish type
+example is:
+
+----
+[
+  56,
+  "pod",
+  0,
+]
+
+----
+
+Trailing commas are optional. An element of a list can be any Zish type
 including a list or map.
 
 
@@ -164,11 +177,20 @@ collection of key / value pairs. Duplicate keys aren't allowed (for keys that
 are strings, the test for uniqueness is done without any
 https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization[normalization]
 of the strings). Maps start with a `{` and end with a `}`. The pairs are
-separated by a `,` and the key is separated from the value with a `:`. Keys
-can by any type except for list, map or null, and values can be of any type. An
-example of a map is:
+separated by a `,` and the key is separated from the value with a `:`. Trailing
+commas are optional. Keys can by any type except for list, map or null, and
+values can be of any type. An example of a map is:
 
-`{"hello": 90, true: "larch", 5: [null]}`.
+----
+{
+  "hello": 90,
+  true: "larch",
+  5: [
+    null,
+  ],
+}
+
+----
 
 
 === Comments
@@ -195,6 +217,8 @@ numbers. Zish also has the following data types that JSON doesn't have:
 
 * Timestamp
 * Bytes (a sequence of bytes)
+
+Trailing commas in lists and maps are allowed in Zish, but they aren't in JSON.
 
 JSON has an 'object' type whereas Zish has a 'map' type. They both represent
 an unordered collection of name / value pairs, but they have two differences:

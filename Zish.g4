@@ -23,7 +23,7 @@ key
     ;
 
 list_type
-    : LIST_START element (COMMA element)* LIST_FINISH
+    : LIST_START element (COMMA element)* COMMA? LIST_FINISH
     | LIST_START LIST_FINISH
     ;
 
@@ -40,7 +40,7 @@ COMMA
     ;
 
 map_type
-    : MAP_START pair (COMMA pair)* MAP_FINISH
+    : MAP_START pair (COMMA pair)* COMMA? MAP_FINISH
     | MAP_START MAP_FINISH
     ;
 
