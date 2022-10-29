@@ -236,6 +236,7 @@ SPACE
     | '\u000C' // form feed
     | '\u000D' // carriage return
     | '\u0020' // space
+    | '\u00A0' // NO-BREAK SPACE
     ;
 
 fragment
