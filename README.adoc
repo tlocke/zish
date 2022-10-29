@@ -35,7 +35,7 @@ Here's an example of Zish:
 
 Zish is a valid stream of Unicode code points encoded in UTF-8. The
 https://github.com/tlocke/zish/blob/master/Zish.g4[formal specification of Zish] is an
-http://www.antlr.org/[ANTLR] grammar. The whitespace characters between tokens are
+http://www.antlr.org/[ANTLR] grammar. The whitespace between tokens are
 https://en.wikipedia.org/wiki/Whitespace_character#Unicode[Unicode whitespace
 characters]. Zish has the following data types:
 
